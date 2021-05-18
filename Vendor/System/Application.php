@@ -3,6 +3,8 @@ namespace System;
 
 class Application 
 {
+
+    private static $instance;
     /**
      * CONTAINER AS ARRAY CONTAIN KEY AND VALUE
      * 
@@ -15,15 +17,24 @@ class Application
      * @param \System\File $file
      */
 
-    public function __construct(File $file)
+    private function __construct(File $file)
     {   
+        $this->file = $file;
         $this->SHARE('file',$file);
         $this->REGISTER_CLASS();
-        $this->helpers();
-        
+        $this->helpers(); 
+        static::$instance = $this;   
+     
+    }
 
-        
-        
+    public static function getinstance($file = null)
+    {
+        if(is_null(static::$instance))
+        {
+            static::$instance = new static($file);
+
+        }
+        return static::$instance;
     }
 
     /**
@@ -60,16 +71,15 @@ class Application
         if(strpos($class,"App") === 0)
         
         {
-            $file = $this->file->to($class.'.php');
+            $file = $class.'.php';
         }
         else
         {
-            $file = $this->file->vendor($class.'.php');
+            $file = "Vendor\\".$class.'.php';
         }
-        if($this->file->exists($file))
-        {
-            $this->file->require($file);
-        }
+        
+    
+        $this->file->require($file);
     }
 
     /**
@@ -79,17 +89,7 @@ class Application
      * @return $value
      */
 
-     public function get($key)
-     {
-         if(array_key_exists($key,$this->container))
-         {
-             return $this->container[$key];
-         }
-         else
-         {
-             return null;
-         }
-     }
+
 
      /**
       * __get get value dynimcialyy by get function from container
@@ -101,6 +101,75 @@ class Application
       }
       private function helpers()
       {
-          $this->file->require($this->file->vendor('helpers.php'));
+        //   $this->file->require($this->file->vendor('helpers.php'));
+         $this->file->require('Vendor\\helpers.php');
       }
+    /*
+        شةف عايز لما اكتب مثلا
+        $app->session 
+        يدخل علي الكونتينر
+        يطلع الكي ده
+        ويطلع القيمه الي اصاده
+        مثلا
+        system/session 
+        ويعمل منها 
+        كلاس جديد
+
+    */
+
+    public function isshare($key)
+    {
+        return isset($this->container[$key]);
+    }
+
+    public function coreclasses()
+    {
+        return [
+            "session" => "System\\Session",
+            "response" => "System\\Http\\Response",
+            "request" => "System\\Http\\Request",
+            "route"  => "System\\Route",
+
+        ];
+    }
+    public function get($key)
+    {
+
+        if(!$this->isshare($key))
+        {
+            if($this->iscorealis($key))
+            {
+                $this->SHARE($key,$this->createopject($key));
+            }
+            else
+            {
+                echo "sorry this key not foudn";
+            }
+        }
+         return $this->container[$key];
+    }
+    public function iscorealis($key)
+    {
+        $coreclasses = $this->coreclasses();
+        return (array_key_exists($key,$coreclasses));
+    }
+
+    public function createopject($key)
+    {
+        
+        $coreclasses = $this->coreclasses($this);
+         $obj = $coreclasses[$key];
+        return new $obj($this);
+        
+    }
+    public function run()
+    {
+        $this->session->start();
+        $this->file->require("App/index.php");
+        $this->request->prepareurl();
+        list($controller,$method,$args) =  $this->route->getproperroute();
+    
+
+    }
+
 }

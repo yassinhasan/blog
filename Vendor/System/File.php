@@ -29,7 +29,7 @@ class File
 
      public function exists($file)
      {
-         return \file_exists($file);
+         return \file_exists($this->to($file));
      }
     /**
      * require file if exists or no
@@ -40,16 +40,20 @@ class File
 
      public function require($file)
      {
-         return require($file);
+         if($this->exists($file))
+         {
+            return require($this->to($file));
+         }
      }
 
-     public function vendor($path)
-     {
-         return $this->to('Vendor/'.$path);
-     }
+    //  public function vendor($path)
+    //  {
+    //      return $this->to('Vendor/'.$path);
+    //  }
      public function to($path)
      {
-         return $this->root.self::DS.str_replace('/','\\',$path);
+         
+         return $this->root.self::DS.str_replace('/',self::DS,$path);
      }
 
 
