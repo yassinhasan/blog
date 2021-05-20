@@ -38,7 +38,7 @@ class Session
     {
         $value = $this->get($key);
         $this->remove($key);
-        return $key;
+        return $value;
     }
     public function all()
     {

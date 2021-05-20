@@ -38,7 +38,7 @@ class Route
     public function getAction($action)
     {
         $action = str_replace("/","\\",$action);
-        $action = (strpos($action,"@") !== false ) ? $action : strtoupper($action."@index"); 
+        $action = (strpos($action,"@") !== false ) ? $action : ucfirst($action."@index"); 
         return $action;
     }
     public function notFound($url)

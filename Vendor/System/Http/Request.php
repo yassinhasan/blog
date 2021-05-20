@@ -49,7 +49,7 @@ class Request
     }
     public function method($key,$default=null)
     {
-       return $this->server("REQUEST_METHOD");
+      return array_get($_POST,$key,$default);
     }
 
 

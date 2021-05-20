@@ -79,7 +79,7 @@ class Application
         }
         
     
-        $this->file->require($file);
+        $this->file->requirefile($file);
     }
 
     /**
@@ -102,7 +102,7 @@ class Application
       private function helpers()
       {
         //   $this->file->require($this->file->vendor('helpers.php'));
-         $this->file->require('Vendor\\helpers.php');
+         $this->file->requirefile('Vendor\\helpers.php');
       }
     /*
         شةف عايز لما اكتب مثلا
@@ -129,6 +129,8 @@ class Application
             "response" => "System\\Http\\Response",
             "request" => "System\\Http\\Request",
             "route"  => "System\\Route",
+            "loader" => "System\\Loader",
+            "view"   => "System\\View\\ViewFactory",
 
         ];
     }
@@ -157,7 +159,7 @@ class Application
     public function createopject($key)
     {
         
-        $coreclasses = $this->coreclasses($this);
+        $coreclasses = $this->coreclasses();
          $obj = $coreclasses[$key];
         return new $obj($this);
         
@@ -165,9 +167,16 @@ class Application
     public function run()
     {
         $this->session->start();
-        $this->file->require("App/index.php");
+        $this->file->requirefile("App/index.php");
         $this->request->prepareurl();
         list($controller,$method,$args) =  $this->route->getproperroute();
+
+            // echo $controller;
+        $output = (string)$this->loader->action($controller,$method,$args);
+        $this->response->setoutput($output);
+        $this->response->send();
+    //   pre($this->loader->controller);
+       
     
 
     }

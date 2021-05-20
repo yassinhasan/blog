@@ -16,7 +16,7 @@ $file  = new File(__DIR__);
 $app  = Application::getinstance($file);
 
 
-$app->route->add_route("/","HOME/MAIN");
+$app->route->add_route("/","Home");
 $app->route->add_route("/post/:text/:id","POST/POST");
 $app->route->add_route("/404","Error\\NotFound");
 

@@ -38,7 +38,7 @@ class File
      * @return void 
      */
 
-     public function require($file)
+     public function requirefile($file)
      {
          if($this->exists($file))
          {

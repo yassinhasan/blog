@@ -7,8 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-     hello from html view
-    </h1>
+    <h1> hello worlod  and i love  <?= $love ?> </h1>
 </body>
 </html>
+
