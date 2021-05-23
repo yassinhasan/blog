@@ -11,6 +11,7 @@ class Loader
 
     public function controller($controller)
     {
+       
         if(!$this->found_in_continaer($controller))
         {
             $this->add_in_container($controller);
@@ -24,11 +25,16 @@ class Loader
         return  array_key_exists($controller,$this->controller);
     }
 
-    public function get_obj_controller($controller)
+    private function get_obj_controller($controller)
     {
-        $controller = $controller."Controller";
-        $controller = "App\\Controllers\\".$controller;
-        return new $controller($this->app);
+        
+        if(isset($controller))
+        {
+            $newcontroller = $controller."Controller";
+            $newcontroller = "App\\Controllers\\".$newcontroller;
+          
+            return new $newcontroller($this->app);
+        }
     }
 
     public function get_controller($controller)
@@ -45,6 +51,13 @@ class Loader
 
     public function action($controller,$action,$args)
     {
-        return call_user_func([$this->get_obj_controller($controller),$action],$args);
+   
+        $obj  = $this->get_obj_controller($controller);
+        if(isset($obj))
+        {
+            return call_user_func([$obj,$action],$args);
+        } 
+        
+        
     }
 }

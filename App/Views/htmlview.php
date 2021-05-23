@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> hello worlod  and i love  <?= $love ?> </h1>
+    <h1> hello worlod  and i love </h1>
 </body>
 </html>
 

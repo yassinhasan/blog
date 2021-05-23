@@ -56,6 +56,7 @@ class Route
                 $args = $this->argumentfrom($route['pattern']);
                 
                 list($controller,$method) = explode("@",$route['action']);
+                
                 return [$controller,$method,$args];
                          
             }

@@ -24,12 +24,6 @@ $app->run();
 
 
 
-// pre($_SERVER);
-// list($controller,$method,$args) =  $app->route->getproperroute();
-// echo $controller;
-// // echo $app->request->url();
-
-
 
 
 

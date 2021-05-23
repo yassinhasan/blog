@@ -24,3 +24,11 @@ if(!function_exists("array_get"))
     }
 }
 
+if(!function_exists("_e"))
+{
+    function _e($value)
+    {
+        return htmlspecialchars($value);
+    }
+}
+

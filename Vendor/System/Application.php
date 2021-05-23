@@ -21,8 +21,8 @@ class Application
     {   
         $this->file = $file;
         $this->SHARE('file',$file);
-        $this->REGISTER_CLASS();
         $this->helpers(); 
+        $this->REGISTER_CLASS();
         static::$instance = $this;   
      
     }
@@ -131,6 +131,7 @@ class Application
             "route"  => "System\\Route",
             "loader" => "System\\Loader",
             "view"   => "System\\View\\ViewFactory",
+            "db"    =>  "System\\DataBase",
 
         ];
     }
@@ -171,13 +172,12 @@ class Application
         $this->request->prepareurl();
         list($controller,$method,$args) =  $this->route->getproperroute();
 
-            // echo $controller;
+            
         $output = (string)$this->loader->action($controller,$method,$args);
         $this->response->setoutput($output);
         $this->response->send();
     //   pre($this->loader->controller);
        
-    
 
     }
 
