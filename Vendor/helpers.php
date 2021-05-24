@@ -1,4 +1,5 @@
 <?php
+ use System\Application;
 
 if(!function_exists("pre"))
 {
@@ -32,3 +33,20 @@ if(!function_exists("_e"))
     }
 }
 
+
+if(!function_exists("assets"))
+{
+    function assets($public_path)
+    {
+       
+    //     $app = Application::getinstance();
+
+    //   $public_path =  $app->request->baseurl()."public/".$public_path;
+    //   $public_path  = str_replace("\\","/", $public_path);
+
+        global $app;
+        $public_path = $app->url->link("public/".$public_path);
+        header("location: $public_path");
+        exit;
+    }
+}

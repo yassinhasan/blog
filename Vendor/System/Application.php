@@ -129,9 +129,12 @@ class Application
             "response" => "System\\Http\\Response",
             "request" => "System\\Http\\Request",
             "route"  => "System\\Route",
-            "loader" => "System\\Loader",
+            "load" => "System\\Loader",
             "view"   => "System\\View\\ViewFactory",
             "db"    =>  "System\\DataBase",
+            "cookie" => "System\\Cookie",
+            "html"   => "System\\Html",
+            "url"     => "System\\Url",
 
         ];
     }
@@ -173,7 +176,7 @@ class Application
         list($controller,$method,$args) =  $this->route->getproperroute();
 
             
-        $output = (string)$this->loader->action($controller,$method,$args);
+        $output = (string)$this->load->action($controller,$method,$args);
         $this->response->setoutput($output);
         $this->response->send();
     //   pre($this->loader->controller);

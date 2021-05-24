@@ -164,6 +164,7 @@ class DataBase
         catch(PDOException $e)
         {
             \pre($this->bindings);
+            echo $sql;
             die($e->getMessage());
         }
         return $query;
@@ -296,7 +297,12 @@ class DataBase
 
     public function fetch($tablename = null)
     {
+        if($tablename)
+        {
+            $this->tablename = $tablename;
+        }
         $sql = $this->fetchstatment();
+  
         $query = $this->query($sql,$this->bindings);
         $result = $query->fetch();
         $this->reset();
@@ -307,8 +313,11 @@ class DataBase
 
     public function fetchall($tablename = null)
     {
+        if($tablename)
+        {
+            $this->tablename = $tablename;
+        }
         $sql = $this->fetchstatment();
-        echo $sql;
         $query = $this->query($sql,$this->bindings);
         $results = $query->fetchAll();
         $this->rows = $query->rowCount();
@@ -329,7 +338,6 @@ class DataBase
         {
             $sql .= " * ";
         }
-
         $sql .= " FROM ".$this->tablename;
 
         if($this->wheres)
