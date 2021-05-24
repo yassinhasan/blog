@@ -16,9 +16,12 @@ $file  = new File(__DIR__);
 $app  = Application::getinstance($file);
 
 
-$app->route->add_route("/","Home");
-$app->route->add_route("/post/:text/:id","POST/POST");
-$app->route->add_route("/404","Error\\NotFound");
+// every controller will be call when url matches this
+// if url = "/" class homecontroller will be call
+// if url = "/admin/login" class logincontroller in admin folder will call
+
+
+
 
 $app->run();
 

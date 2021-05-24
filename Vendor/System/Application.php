@@ -173,13 +173,15 @@ class Application
         $this->session->start();
         $this->file->requirefile("App/index.php");
         $this->request->prepareurl();
+        echo $this->request->url();
         list($controller,$method,$args) =  $this->route->getproperroute();
 
-            
+
         $output = (string)$this->load->action($controller,$method,$args);
+        
         $this->response->setoutput($output);
         $this->response->send();
-    //   pre($this->loader->controller);
+     
        
 
     }

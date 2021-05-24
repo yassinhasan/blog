@@ -28,6 +28,17 @@ class Route
 
     public function generate_pattern($url)
     {
+        $url = str_replace("\\" , "/",$url);
+        if(\strpos($url,"/") !== 0)
+        {
+            // echo "yes $url not start with /";
+            $url = "/".$url;
+        }
+        // if(! \preg_match("#/$#",$url))
+        // {
+        //     $url = $url."/";
+        // }
+        // echo $url."<br>";
         $pattern = "#^";
         $pattern .= str_replace([":text",":id"],["([a-zA-Z0-9-]+)","(\d+)"],$url);
         $pattern .= "$#";

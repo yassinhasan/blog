@@ -11,6 +11,13 @@ class Loader
     }
 
     // return controller object from url 
+    // //$app->route->add_route("admin/login","Admin/Login");
+
+    // this method will return 
+    // object of App\\Controllers\\Admin\\LoginController 
+    // method default == index
+    // it's content will send through send() by class respose
+    
     public function controller($controller)
     {
        
@@ -19,7 +26,7 @@ class Loader
             $this->add_in_container($controller);
 
         }
-        return $this->controller[$controller];
+         return $this->controller[$controller];
     }
 
     // check if found 
@@ -29,41 +36,32 @@ class Loader
     }
 
     // get obj to use it in func_user_array(cllable)
-    private function get_obj_controller($controller)
-    {
-        
-        if(isset($controller))
-        {
-            $newcontroller = $controller."Controller";
-            $newcontroller = "App\\Controllers\\".$newcontroller;
-          
-            return new $newcontroller($this->app);
-        }
-    }
-
-
-    public function get_controller($controller)
-    {
-        
-        return $this->controller[$controller];
-    }
-
+    //$app->route->add_route("admin/login","Admin/Login");
+    // here controller = Login found in folder Admin
+    // we will add Controller so will be LoginController
+    // App\\Controllers\\Admin\\LoginController
+    // adction will be index
+    // so if i  make class  App\\Controllers\\Admin\\LoginController 
+    // will be readen
 
     public function add_in_container($controller)
-    {
-        $obj = $this->get_obj_controller($controller);
-       $this->controller[$controller] = $obj;
-    }
+        {
+            $controllerobj = $controller."Controller";
+            $controllerobj = "App\\Controllers\\".$controllerobj;
+            
+            $controllerobj = new $controllerobj($this->app);
+            
+        $this->controller[$controller] = $controllerobj;
+        }
 
     // it will call method in controller like index or add or delete
     public function action($controller,$action,$args)
     {
-   
-        $obj  = $this->get_obj_controller($controller);
-        if(isset($obj))
-        {
-            return call_user_func_array([$obj,$action],$args);
-        }  
+            $obj = $this->controller($controller);
+            
+
+           return call_user_func_array([$obj,$action],$args);
+ 
     }
 
 
