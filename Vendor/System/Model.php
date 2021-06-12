@@ -12,7 +12,7 @@ abstract class Model
 
     public function __get($name)
     {
-        return $this->app->get($name);
+        return $this->app->getobject($name);
     }
 
     public function __call($mothod,$args)

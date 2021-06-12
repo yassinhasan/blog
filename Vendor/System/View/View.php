@@ -1,19 +1,22 @@
 <?php
 namespace System\View;
-use System\File;
-class View  implements ViewInterface
+use System\File; 
+use  System\View\Viewer;
+use  System\Application;
+use  System\Controller;
+class View  extends Controller implements ViewInterface 
 {
-    private $file;
+    protected $app;
     private $output;
     private $data = [];
     private $viewpath;
 
 
 
-    public function __construct(File $file,$viewpath,$data)
+    public function __construct(Application $app,$viewpath,$data)
     {
         
-        $this->file = $file;
+         $this->app = $app;
         $this->prepareviewpath($viewpath);
         $this->data = $data;
         
@@ -23,9 +26,9 @@ class View  implements ViewInterface
     public function prepareviewpath($viewpath)
     {
         $relativepath = "App\\Views\\".$viewpath.".php";
-         if($this->file->exists($relativepath))
+         if($this->app->file->exists($relativepath))
         {
-           return $this->viewpath = $this->file->to($relativepath);
+           return $this->viewpath = $this->app->file->to($relativepath);
         }
         else
         {
@@ -52,4 +55,6 @@ class View  implements ViewInterface
     {
      return $this->getoutput();  
     }
+
+
 }

@@ -14,7 +14,8 @@ class ViewFactory
 
     public function render($viewpath,$data=[])
     {
+        
       
-        echo new View($this->app->file, $viewpath,$data);
+       return new View($this->app,$viewpath,$data);
     }
 }

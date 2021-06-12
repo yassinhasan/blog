@@ -1,10 +1,12 @@
 <?php
 namespace System\Http;
+use System\Http\UploadFile;
 class Request
 {
 
     private $url;
     private $baseurl;
+    private $file = [];
 
     public function prepareurl()
     {
@@ -16,8 +18,18 @@ class Request
             list($request_uri,$query_string) = explode("?",$request_uri);
             
         }
+
         
-        $this->url = $request_uri; 
+        if(\strlen($request_uri) > 1 )
+        {
+            $request_uri = \rtrim($request_uri,"/");
+           
+        }
+       
+     
+       
+        $this->url = $request_uri;
+       
         $baseurl = $this->server("REQUEST_SCHEME")."://".$this->server("HTTP_HOST")."/";
         
         $this->baseurl = $baseurl;
@@ -51,6 +63,19 @@ class Request
     {
       return array_get($_POST,$key,$default);
     }
+    public function file($input)
+    {
+        if(array_key_exists($input,$this->file))
+        {
+            return $this->file[$input];
+        }
+
+        $this->file[$input] = new UploadFile($input);
+        return $this->file[$input];
+    }
+
+    
+
 
 
 }

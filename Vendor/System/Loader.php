@@ -23,6 +23,7 @@ class Loader
        
         if(!$this->found_in_continaer($controller))
         {
+            
             $this->add_in_container($controller);
 
         }
@@ -47,16 +48,18 @@ class Loader
     public function add_in_container($controller)
         {
             $controllerobj = $controller."Controller";
+            $controllerobj = str_replace("/","\\",$controllerobj);
             $controllerobj = "App\\Controllers\\".$controllerobj;
             
-            $controllerobj = new $controllerobj($this->app);
+          
             
-        $this->controller[$controller] = $controllerobj;
+        $this->controller[$controller] = new $controllerobj($this->app);
         }
 
     // it will call method in controller like index or add or delete
     public function action($controller,$action,$args)
     {
+        
             $obj = $this->controller($controller);
             
 
@@ -84,7 +87,7 @@ class Loader
     // get obj to use it in func_user_array(cllable)
     private function preparename($model)
     {
-            $newmodel = $model."Model";
+            $newmodel = \ucfirst($model)."Model";
             $newmodel = "App\\Models\\".$newmodel;
             return $newmodel;
     }

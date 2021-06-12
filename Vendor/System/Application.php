@@ -1,5 +1,6 @@
 <?php
 namespace System;
+use closure;
 
 class Application 
 {
@@ -48,6 +49,10 @@ class Application
     
     public function SHARE($key,$value)
     {
+        if($value instanceof closure)
+        {
+            $value = \call_user_func($value,$this);
+        }
         $this->container[$key] = $value;
     }
 
@@ -94,10 +99,25 @@ class Application
      /**
       * __get get value dynimcialyy by get function from container
       */
-
+      public function getobject($key)
+      {
+  
+          if(!$this->isshare($key))
+          {
+              if($this->iscorealis($key))
+              {
+                  $this->SHARE($key,$this->createopject($key));
+              }
+              else
+              {
+                  echo "sorry this key $key not foudn";
+              }
+          }
+           return $this->container[$key];
+      }
       public function __get($name)
       {
-          return $this->get($name);
+          return $this->getobject($name);
       }
       private function helpers()
       {
@@ -135,25 +155,11 @@ class Application
             "cookie" => "System\\Cookie",
             "html"   => "System\\Html",
             "url"     => "System\\Url",
+            "validator"  => "System\\Validation"
 
         ];
     }
-    public function get($key)
-    {
 
-        if(!$this->isshare($key))
-        {
-            if($this->iscorealis($key))
-            {
-                $this->SHARE($key,$this->createopject($key));
-            }
-            else
-            {
-                echo "sorry this key not foudn";
-            }
-        }
-         return $this->container[$key];
-    }
     public function iscorealis($key)
     {
         $coreclasses = $this->coreclasses();
@@ -173,9 +179,9 @@ class Application
         $this->session->start();
         $this->file->requirefile("App/index.php");
         $this->request->prepareurl();
-        echo $this->request->url();
         list($controller,$method,$args) =  $this->route->getproperroute();
 
+    
 
         $output = (string)$this->load->action($controller,$method,$args);
         

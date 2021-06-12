@@ -7,6 +7,7 @@ class Html
     private $title;
     private $descrpition;
     private $keywords;
+    private $class;
 
 
     public function __construct(Application $app)
@@ -22,6 +23,15 @@ class Html
     public function gettitle()
     {
         return $this->title;
+    }
+    public function setclass($class)
+    {
+        $this->class = $class;
+    }
+
+    public function getclass()
+    {
+        return $this->class;
     }
     public function setdesc($descrpition)
     {

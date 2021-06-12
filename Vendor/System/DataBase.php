@@ -79,6 +79,10 @@ class DataBase
     // when add data it will insert indo this->bindings as key and value
     // like data("name" , "hasan")
     // bindings will be  (0 , "hasan") will take values only
+    /**
+     *      [name] => sad
+     *     [status] => sad
+     */
     public function data( $key,$value = null)
     {
         
@@ -106,6 +110,7 @@ class DataBase
         $sql ="";
         foreach(array_keys($this->data) as $key => $value  ) 
         {
+           
             $sql.= $value." = ? , ";   
         }
 
@@ -163,6 +168,7 @@ class DataBase
         }
         catch(PDOException $e)
         {
+            
             \pre($this->bindings);
             echo $sql;
             die($e->getMessage());

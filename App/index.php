@@ -5,22 +5,63 @@ use System\File;
 
 $app = Application::getinstance();
 
+// add layout to container in $app so
+// it will return function load controaller[layoutcontrolelr]
+
+$app->SHARE("layout",function($app){
+    return $app->load->controller("Admin/Common/Layout");
+});
+
+// homepage
+
+$app->load->controller("Admin\Access")->index();
+
+
+$app->route->add_route("/","Home");
+
+
 
 // admin page
- $app->route->add_route("admin/login","Admin/Login");
+// admin/users/login ده الينك الي هينكب فوق واقارنه مع الي مكتوب ده
+// لو لقيته صحيح هيحملي الكلاس  ده  logincontaller 
+// بقوله شغل الكلاس ده يعني حمل ملف الكلاس ده يعني اي حاجه هكتبها جوه الكلاس هتتعرض
+// لو عملت  echo "hasan";  هتنعرض
+// اللي موجود في فولدر الادمن
+// جوه الميثود Index
+// اعمل ريندر لاي حاجه انت عايزها انت مش مربوط هنا باي حاجه
+ $app->route->add_route("users/login","Admin/Login");
 
- $app->route->add_route("admin/login/submit","Admin/Login@submit","POST");
+ //admin/users/login/submit
+
+ //  admin/users/login/submit ده الباترن
+ // هقارنه مع اللي مكتوب هنا في الموقع http://www.blog27.com/admin/users/login/subit
+ // لو لقيته تمام بقوله حملي الكلاس
+ // logincontroller 
+ // وشغلي الميثود فيه الي هيا
+ // submit 
+ $app->route->add_route("users/login/submit","Admin/Login@submit","POST");
+ $app->route->add_route("users/logout","Admin/Logout");
 
 
  // dashboard
 
  $app->route->add_route("admin/dashobard","Admin/Dashobard");
  $app->route->add_route("admin","Admin/Dashobard");
+ $app->route->add_route("admin/dashboard/add","Admin/Dashobard@add");
+ $app->route->add_route("admin/dashboard/submit","Admin/Dashobard@submit");
 
 // logout
 
- $app->route->add_route("/logout","Logout");
+//  $app->route->add_route("/logout","Logout");
 
+  //cateogry 
+
+  $app->route->add_route("admin/categorys","Admin/Categorys");
+  $app->route->add_route("admin/categorys/add","Admin/Categorys@add");
+  $app->route->add_route("admin/categorys/submit","Admin/Categorys@submit","POST");
+  $app->route->add_route("admin/categorys/edit/:id","Admin/Categorys@edit");
+  $app->route->add_route("admin/categorys/save/:id","Admin/Categorys@save","POST");
+  $app->route->add_route("admin/categorys/delete/:id","Admin/Categorys@delete");
  //users 
 
  $app->route->add_route("admin/users","Admin/Users");
@@ -53,14 +94,7 @@ $app = Application::getinstance();
   $app->route->add_route("admin/posts/comments/save/:id","Admin/Comments@save","POST");
   $app->route->add_route("admin/posts/comments//delete:id","Admin/Comments@delete");
 
-  //cateogry 
 
-  $app->route->add_route("admin/categorys","Admin/Categorys");
-  $app->route->add_route("admin/categorys/add","Admin/Categorys@add");
-  $app->route->add_route("admin/categorys/submit","Admin/Categorys@submit","POST");
-  $app->route->add_route("admin/categorys/edit/:id","Admin/Categorys@edit");
-  $app->route->add_route("admin/categorys/save/:id","Admin/Categorys@save","POST");
-  $app->route->add_route("admin/categorys/delete/:id","Admin/Categorys@delete");
 
 
     //posts 
@@ -86,9 +120,15 @@ $app = Application::getinstance();
      
 
 
- $app->route->add_route("404","NotFound");
- $app->route->add_route("/404");
+    // هنا بقوله لو محصلش اي ماتش في كلاس الروت
+    // اعملي تحويل علي المسار ده
+    // blog/404 
+    // كده هيحصل ماتش تمام ولما يحصل هيحمل صفحه 
+    // notfoundcontrolelr
+    // method == notfound
+ $app->route->add_route("404","NotFound@notfound");
+//  $app->route->add_route("/404");
 
-
+$app->route->add_route("accessdenied","AccessDenied");
 
 

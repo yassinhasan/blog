@@ -9,19 +9,23 @@ class  Cookie
         $this->app = $app;
     }
     // 3600 equal to 1 hr
-    public function setcookie($key,$value , $timeinhour = 1)
+    public function setcookie($key,$value , $timeinhour = 10)
     {
         \setcookie($key,$value,\time() +  $timeinhour * 3600 , "","", false ,true );
     }
 
-    public function cookie($key)
+    public function get($key)
     {
         return array_get($_COOKIE,$key);
     }
 
     public function remove($key)
     {
-        \setcookie($key,null,\time() -  3600 , "","", false ,true );
+        \setcookie($key,null, -1 , "","", false ,true );
+        if(isset($_COOKIE[$key]))
+        {
+            unset($_COOKIE[$key]);
+        }
     }
 
     public function all()

@@ -34,6 +34,12 @@ class Route
             // echo "yes $url not start with /";
             $url = "/".$url;
         }
+
+        if(\strlen($url > 1))
+        {
+            $url  = \rtrim($url,"/");
+        }
+        // echo $url."<br>";
         // if(! \preg_match("#/$#",$url))
         // {
         //     $url = $url."/";
@@ -64,6 +70,7 @@ class Route
             if($this->ismatching($route['pattern']))
             {
                
+                
                 $args = $this->argumentfrom($route['pattern']);
                 
                 list($controller,$method) = explode("@",$route['action']);
@@ -71,7 +78,14 @@ class Route
                 return [$controller,$method,$args];
                          
             }
-        } 
+
+           
+        }
+
+        // $this->app->url->redirect("404");
+
+
+         
     }
 
     public function ismatching($pattern)
@@ -84,6 +98,13 @@ class Route
          preg_match_all($pattern,$this->app->request->url(),$matches);
          array_shift($matches);
          return $matches;
+    }
+
+    // grt sll routed
+
+    public function grtroutes()
+    {
+        return $this->routes;
     }
 }
 
