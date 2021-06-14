@@ -52,7 +52,7 @@ class Validation
         }
         
         $inputvalue = $this->inputvalue($input);
-        if($inputvalue == "")
+        if($inputvalue == "" or $inputvalue == null)
         {
             $message = isset($custommessage) ? $custommessage : sprintf(" %s is required" , $input);
             
@@ -78,7 +78,24 @@ class Validation
         }
         return $this;
     }
+    public function image($input)
+    {
+        $image = $this->app->request->file($input);
+        if($image->errorupload())
+        {
+            $message = isset($custommessage) ? $custommessage : sprintf(" no file uploaded" );
+            $this->adderror($input,$message);
+        }
 
+        if(! $image->isimage())
+        {
+            $message = isset($custommessage) ? $custommessage : sprintf(" this  is not valid image" );
+            
+            $this->adderror($input,$message);
+           
+        }
+        return $this;
+    }
     public function ismatched($firstinput,$secondinput,$custommessage =null)
     {
         $firstvalue = $this->inputvalue($firstinput);
@@ -90,6 +107,7 @@ class Validation
             
             $this->adderror($secondinput,$message);
         }
+        return $this;
     }
 
     public function uniqe($input , array $database,$custommessage = null)

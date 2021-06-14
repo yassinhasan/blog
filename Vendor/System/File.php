@@ -55,6 +55,16 @@ class File
          
          return $this->root.self::DS.str_replace('/',self::DS,$path);
      }
+     public function topublic($path)
+     {
+         
+         return $this->root.self::DS."App".self::DS."public".self::DS.str_replace('/',self::DS,$path);
+     }
+     public function toupload($path)
+     {
+         
+         return $this->root.self::DS."public".self::DS."uploades".self::DS.str_replace('/',self::DS,$path);
+     }
 
 
 }

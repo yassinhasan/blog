@@ -20,7 +20,7 @@ class AccessController extends Controller
             $exceptionurl = ["users/login" , "users/login/submit" , "accessdenied" ,"/", "users/logout"];
             
 
-
+  
             
             // if not loged goto to login page but if it's already loggin bage so donot repeat it so ignore it 
 
@@ -39,17 +39,17 @@ class AccessController extends Controller
                 $id = $user->user_group_id;
 
                 // only pages that he access it 
-   
+                
                 $allowedurl =   $pagesmodel->getallowedpages($id);
-                $newcurrenturl= preg_replace("/\/[0-9]$/" , "/:id" ,$currenturl);
+                $newcurrenturl= preg_replace("/\/[0-9]{1,}$/" , "/:id" ,$currenturl);
                if(! in_array($newcurrenturl , $allowedurl) AND !in_array($currenturl , $exceptionurl)) 
                 {
                     //     pre($newcurrenturl);
                     //    pre($allowedurl);
-                      
-
-                $this->url->redirect("accessdenied");
+             
+               $this->url->redirect("accessdenied");
                 }
+
                 
                 // get current url
             }

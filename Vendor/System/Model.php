@@ -32,6 +32,14 @@ abstract class Model
        
     }
 
+    public function idexists($id)
+    {
+      
+      $id_exists = $this->select($id)->where("id = ? " , $id)->fetch($this->tablename);
+
+    return  $id_exists ? true : false;
+    }
+
 
     
 

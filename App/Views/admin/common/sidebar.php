@@ -39,6 +39,15 @@
                             users
                         </span></a>
                     </div>
+                    <div class="sidebar-item">
+                        <div class="icon">
+                            <i class="fas fa-home">
+                            </i>
+                        </div>
+                        <a href="<?= fullurl("admin/posts")?>"><span>
+                            posts
+                        </span></a>
+                    </div>
                 </div>
 
             </div>

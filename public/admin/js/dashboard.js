@@ -108,17 +108,19 @@ themeicon.addEventListener("click",()=>
     addcategory = document.querySelector(".add-cat-button"),
     editbtn = document.querySelector(".btn-edit");
 
-
+ 
 
     //
     if(addcategory)
     {
-      
+                
+       
+  
     addcategory.addEventListener("click",(e)=>
     {
         e.preventDefault();
-        url = addcategory.getAttribute("data-target-url")
-       
+        url = addcategory.getAttribute("data-target-url");
+
         fetch(url)
         .then((resp)=>
         {
@@ -288,68 +290,17 @@ themeicon.addEventListener("click",()=>
         })
 
 
-    // let save = document.querySelector(".editbtn");
-    // if(save)
-    // {
-    //   save.addEventListener("click",(e)=>
-    //   {
-    //     e.preventDefault();
-    //      let form = document.querySelector("#editform"),
-    //       results = document.querySelector(".results"),
-    //       loading = document.querySelector(".loading"),
-    //       formaction = form.getAttribute("action");
-  
-    //       let formdata = new FormData(form);
-  
-    //       form.classList.add("load");
-    //       loading.classList.add("show");
-    //       fetch(formaction,
-    //         {
-    //           method : "POST",
-  
-    //           body : formdata
-  
-    //         })
-    //         .then((res)=>
-    //         {
-    //           return res.json();
-    //         })
-    //         .then((res)=>
-    //         {
-    //           if(res)
-    //           {
-    //           //clear loading
-    //           form.classList.remove("load");
-    //           loading.classList.remove("show");
-    //           console.log(res)
-    //           }
-             
-  
-    //           if( res.error)
-    //           {
-  
-    //             results.classList.add("failed");
-    //             results.innerHTML = res.error;
-  
-    //           }
-    //           else
-    //           {
-    //             results.classList.add("success");
-    //             results.innerHTML = res.success;
-    //           }
+    //     document.addEventListener('DOMContentLoaded', ()=>{  
+    //       console.log("yes")
+    //       if(document.querySelector(".daetails"))
+    //       {
 
-    //           if(res.redirect)
-    //           {
-    //             window.location.href = res.redirect;
-    //           }
-
-              
-    //         })
-  
-    //   })
-    // }
-    
+    //         CKEDITOR.replace( 'details' );
+    //       }
+    //       else
+    //       {
+    //         console.log("|mo")
+    //       }
+    // })    
 
 
-
-   

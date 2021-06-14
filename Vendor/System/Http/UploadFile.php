@@ -13,6 +13,9 @@ class UploadFile
     private $file_temp;
     private $filetype;
     private $error_message = [];
+    private $imagesrc;
+    private $savedname;
+    const DS = DIRECTORY_SEPARATOR;
 
     const ALLOWED_EXTENSION = ["jpeg" , "gif" , "png" , "jfif"];
 
@@ -151,15 +154,19 @@ class UploadFile
 
     {
        
-        $filename = sha1(rand(0,1000))."_".sha1(rand(0,1000)).".".$this->file_extension;
         
-        $destination = $target."\\".$filename;
+        $filename = sha1(rand(0,1000))."_".sha1(rand(0,1000)).".".$this->file_extension;
+        $this->savedname = $filename;
+        $destination = $target.self::DS.$filename;
+      
+        $this->imagesrc = $destination;
         if($this->noerror())
         {
            if(! is_dir($target))
            {
                mkdir($target,0777,true);
            }
+
             move_uploaded_file($this->file_temp , $destination);
 
         }
@@ -167,7 +174,29 @@ class UploadFile
         {
             pre($this->getallmessages());
         }
+
+        return $this;
+        
     }
+
+    public function imagesrc()
+    {
+        if($this->noerror())
+        {
+           return $this->imagesrc ; 
+        }
+        
+    }
+
+    public function savedname()
+    {
+        if($this->noerror())
+        {
+           return $this->savedname ; 
+        }
+        
+    }
+    
 
 
 }

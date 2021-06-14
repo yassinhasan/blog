@@ -32,13 +32,28 @@
                                         #
                                     </th>
                                     <th>
-                                        Users Name
+                                   user name
                                     </th>
                                     <th>
-                                        Status
+                                    email
                                     </th>
                                     <th>
-                                        Action
+                                    gender
+                                    </th>
+                                    <th>
+                                    birthday
+                                    </th>
+                                    <th>
+                                    image
+                                    </th>
+                                    <th>
+                                    created
+                                    </th>
+                                    <th>
+                                    status
+                                    </th>
+                                    <th>
+                                    action
                                     </th>
                                 </tr>
                             </thead>
@@ -51,7 +66,23 @@
                                     <?= $user->id ?>
                                     </td>
                                     <td>
-                                    <?= $user->first_name ?>
+                                    <?= $user->first_name." ".$user->last_name ?>
+                                    </td>
+                                    <td>
+                                    <?= $user->email?>
+                                    </td>
+                                    <td>
+                                    <?= $user->gender?>
+                                    </td>
+                                    <td>
+                                    <?= date("Y-m-d",$user->birthday)?>
+                                    </td>
+                                    <td>
+                                    <img src=" <?= mlink("uploades/images/".$user->image)?>"
+                                     class="table-avatar">    
+                                    </td>
+                                    <td>
+                                    <?= date("Y-m-d",$user->created)?>
                                     </td>
                                     <td>
                                     <?= $user->status ?>

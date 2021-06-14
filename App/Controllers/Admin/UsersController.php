@@ -6,19 +6,8 @@ class UsersController extends Controller
 {
     public function index()
     {
-    //     // pre($this->layout);
-    //     $this->load->controller("Admin/Common/Header")->index();
-    //     $this->load->controller("Admin/Common/Nav")->index();
-    //     $this->load->controller("Admin/Common/Sidebar")->index();
-    //    // return $this->view->render("admin/users/users");
-    //     $this->load->controller("Admin/Common/Footer")->index();
-
-    // here i will send object that conatin view of content of users 
-    // then layout objecy will recieve this object and save it containr of data
-    // so in layoutpage i will write content of this page
 
 
-    //load session messages
 
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("users");
@@ -49,50 +38,78 @@ class UsersController extends Controller
         /**
         * todo // check id if exists ok if not redirect to main users page
         */
-        $users = $this->load->model("users")->getbyid($id);
-
+        $usersmodel = $this->load->model("users");
+        $users =  $usersmodel->getusers($id);
         return $this->form($users);
     }
     
 
     public function form($users = null)
     {
-        if($users)
+        if($users !=null)
         {
-            $data['name'] = $users->first_name;
+            /*
+             [id] => 1
+            [user_group_id] => 1
+            [first_name] => yassin
+            [last_name] => hasan
+            [email] => yassin781@gmail.com
+            [password] => $2y$10$mNkSK1GDZjqHB6Vyp0saiu53Wr39gJa499qMvJkwqazXftZaskHsG
+            [image] => 
+            [gender] => 
+            [birthday] => 0
+            [created] => 0
+            [status] => enabled
+            [ip] => 
+            [logincode] => 
+            [name] => superadmin
+            */
+            $usersmodel = $this->load->model("users");
+            $data['users_groups'] =  $usersmodel->getusers_groups();
             $data['id'] = $users->id;
+            $data['first_name'] = $users->first_name;
+            $data['last_name'] = $users->last_name;
+            $data['email'] = $users->email;
+            $data['image'] = $users->image;
+            $data['gender'] = $users->gender;
+            $data['birthday'] = $users->birthday;
+            $data['created'] = $users->created;
             $data['status'] = $users->status;
+            $data['name'] = $users->name;
             $data['action'] = $this->url->link("admin/users/save/".$data['id']);
             return   $this->view->render("admin/users/form",$data);
         }
         else
         {
+            $users  = $this->load->model("users");
+            $users_groups =  $users->getusers_groups();
+            $data['users_groups'] =  $users_groups;
             $data['action'] = $this->url->link("admin/users/submit");
             return $this->view->render("admin/users/form",$data);
         }
     }
+
+
     public function submit()
     {
         $json = [];
 
-      
         
-        // first get data and check if valid or no
-        // if valid so insert it into table users
-
         if($this->isvalid())
         {
-            // here data is alrady valid so insert it into model class
-            // model class will creat new row of data 
+
             $users  = $this->load->model("users");
 
-            $users->insertnewusers();
+            if($users->insertnewusers())
+            {
+             $json['success'] = "Users added Succsefuuly";               
+            }
 
-            $json['success'] = "Users added Succsefuuly";
+
         }
         else
         {
-
+     
             $json['error'] = $this->validator->getflattenmessage();
         }
         $this->json($json);
@@ -102,10 +119,26 @@ class UsersController extends Controller
 
     // validata data of catgoery before add it to dayabase
 
-    public function isvalid()
+    public function isvalid($id = null)
     {
-        $this->validator->required("first_name" , "users name is required");
-        $this->validator->required("status" , "status name is required");
+        $this->validator->required("first_name" , "users name is required")
+                        ->required("last_name" , "users name is required")
+                        ->required("email" , "email name is required")
+                        ->email("email" , "email name is required")
+                        ->required("password" , "password name is required")
+                        ->ismatched("password" ,"cpassword")
+                        ->required("birthday")
+                        ->required("status")
+                        ->required("gender");
+
+        if($id != null)
+        {
+            $this->validator->uniqe("email",["users","email","id",$id]);
+        }
+        else
+        {
+            $this->validator->uniqe("email",["users","email"]);
+        }
         return $this->validator->pass();
     }
 
@@ -115,18 +148,15 @@ class UsersController extends Controller
     {
         $id = $id[0];
 
-        
         $json = [];
-
-      
-        
         // first get data and check if valid or no
         // if valid so insert it into table users
 
-        if($this->isvalid())
+        if($this->isvalid($id))
         {
             // here data is alrady valid so insert it into model class
             // model class will creat new row of data 
+
             $users  = $this->load->model("users");
 
             $users->save($id);

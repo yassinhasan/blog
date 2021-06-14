@@ -63,6 +63,9 @@ class Request
     {
       return array_get($_POST,$key,$default);
     }
+
+
+    
     public function file($input)
     {
         if(array_key_exists($input,$this->file))

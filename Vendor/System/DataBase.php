@@ -346,14 +346,10 @@ class DataBase
         }
         $sql .= " FROM ".$this->tablename;
 
-        if($this->wheres)
-        {
-            $sql .= ' WHERE '. \implode(" " , $this->wheres);
-        }
         // [left join 'users on userid.id  = contat.id refernce ...']
         if($this->join)
         {
-            $sql .= \implode(" " , $this->select);
+            $sql .= \implode(" " , $this->join);
         }
 
         if($this->orderby)
@@ -368,6 +364,10 @@ class DataBase
         if($this->offset)
         {
             $sql .= " OFFSET ". $this->offset;
+        }
+        if($this->wheres)
+        {
+            $sql .= ' WHERE '. \implode(" " , $this->wheres);
         }
 
 

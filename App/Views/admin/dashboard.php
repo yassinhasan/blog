@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
     <!--  start nav section  consists of logo area -- sreach area -- avatar area  -->
     <nav class="nav">
         <div class="logo">
@@ -163,6 +164,15 @@
                             users
                         </span></a>
                     </div>
+                    <div class="sidebar-item">
+                        <div class="icon">
+                            <i class="fas fa-home">
+                            </i>
+                        </div>
+                        <a href="admin\posts"><span>
+                            posts
+                        </span></a>
+                    </div>
                 </div>
 
             </div>
@@ -175,8 +185,10 @@
                                 </div>
                                 <span class="">
                                     100
+                                 
                                 </span>
                                 <span>
+                              
                                     tasks to do
                                 </span>
                             </div>

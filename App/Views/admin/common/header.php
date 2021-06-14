@@ -7,6 +7,7 @@
     <title> <?= $title ?> </title>
     <link rel="stylesheet" href= <?= mlink("admin/css/all.min.css") ?>>
     <link rel="stylesheet" href= <?= mlink("admin/css/style.css") ?>>
+    <script src= <?= mlink('admin/js/ckeditor/ckeditor.js')  ?> >  </script>
     
 </head>
 <body>
