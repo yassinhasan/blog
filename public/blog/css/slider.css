@@ -1,0 +1,148 @@
+/* slider */
+
+.slider
+{
+    background: url(../images/sliderbg.png);
+    background-size: cover;
+    width: 100%;
+    /* padding: 100px 15px; */
+    margin: 100px 0;
+    padding: 20px;
+
+}
+.slider .box 
+{
+    position: relative;
+    overflow-y: hidden;
+    height: 600px
+}
+.slider-box
+{
+    width: 100%;
+    overflow-x: scroll;
+}
+
+
+
+.wrapper-slider 
+{
+    display: flex;
+    padding: 20px 0;
+}
+
+.slider-post
+{
+    margin:0 30px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    flex-shrink: 0;
+}
+
+.slider-post .img-slider img 
+{
+    width: 100%;
+}
+
+.slider-post .slider-post-info .post-title 
+{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    text-transform: capitalize;
+    margin: 40px 0 20px;
+    font-family: var( --Abel);
+}
+.slider-post .slider-post-info  > div
+{
+    
+    text-align: center;
+    margin: 20px 0;
+}
+.slider-post-category
+{
+    background: var(--midnight);
+    padding: 7px 20px;
+    border-radius: 4px;
+    color: var(--light-hover); 
+    font-size: 30px;
+}
+
+.slider-post-time
+{
+    color: var(--text-color);
+    font-family: var(--Abel);
+}
+
+.slider-navigation
+{
+position: absolute;
+top: 50%;
+width: 100%;
+display: flex;
+justify-content: space-between; 
+pointer-events: none;
+padding: 0 30px;
+}
+.slider-navigation > div 
+{
+    font-size: 25px;
+    height: 40px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: var(--light-background);
+    color: var(--midnight);
+    cursor: pointer;
+    pointer-events :auto;
+    transition: all .3s;
+}
+
+.slider-navigation > div:hover
+{
+    background-color: var(--midnight);
+    color: var(--light-background);
+}
+.slider-navigation > div.disabled 
+{
+    display: 0;
+    visibility: hidden;
+}
+
+@media (min-width: 769px) {
+    .slider-post
+    {
+        width: 440px;
+    }
+    .slider .box {
+        position: relative;
+        overflow-y: hidden;
+        height: 607px;
+        padding-top: 18px;
+    }
+}
+@media (max-width: 768px) {
+    .slider-post
+    {
+        width: 330px;
+    }
+    .slider .box {
+        position: relative;
+        overflow-y: hidden;
+        height: 533px;
+    }
+}
+
+@media (min-width: 280px ) AND (max-width: 787px) {
+    .slider-post
+    {
+        width: 301px;
+    }
+}
+

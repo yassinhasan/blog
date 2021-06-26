@@ -369,8 +369,8 @@ input:focus::placeholder
 {
     position: -webkit-sticky;
     position: sticky;
-    top: 65px;
-    height: calc(100vh - 50px);
+    top: 75px;
+    height: calc(100vh - 75px);
     background-color: var(--main-bg-color);
     width: 70px;
     overflow: hidden;
@@ -449,6 +449,8 @@ input:focus::placeholder
     width: 100%;
     background-color: var(--second-bg-color);
     overflow: hidden;
+    position: relative;
+    min-height: 100vh;
 }
 .content .box
 {
@@ -774,28 +776,36 @@ table tbody tr td .progress span
 
 /* start popup */
 
-/* .popup-container
+ .popup-container
 {
-    /* display: none; */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: 3;
+    display: block;
+}
 
 .popup-container.hide
 {
     display: none;
+    
 } 
 .popup
 {
- position: absolute;
-top: 4%;
-left: 50%;
-transform: translate(-50%, 50%);
-background: var(--main-bg-color);
-
-max-width: 600px;
-min-width: 460px;
-
-padding: 20px 20px 60px 20px;
-box-shadow: 0px 3px 6px #ccc;
-z-index: 3;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--main-bg-color);
+    padding: 20px 20px 60px 20px;
+    box-shadow: 0px 3px 6px #ccc;
+    z-index: 3;
+    overflow: auto;
+    max-height: 90%;
+        min-width: 340px;;
+    max-width: 900px;
 
 } 
 
@@ -804,6 +814,10 @@ z-index: 3;
     display: flex;
     flex-direction: column;
   
+}
+.popup form
+{
+    position: relative;
 }
 .form-name
 {
@@ -816,17 +830,17 @@ z-index: 3;
 {
     display: flex;
     justify-content: space-between;
-    /* justify-content: space-around; */
-    /* margin: 0px 10px 0 10px; */
+    flex-wrap: wrap;
 }
-.form-group 
+.form-items .form-group 
 {
     margin: 10px 0;
+    margin: 2%;
+    width: 46%;
+   
 }
-.form-group.fullwidth
-{
-    width: 100%;
-}
+
+
 
 .form-group label
 {
@@ -835,32 +849,53 @@ z-index: 3;
     color: var(--main-color);
     margin-bottom: 5px;
 }
-.form-group  input,.form-group select 
+.form-group  input 
 {
-    width: 260px;
+    width: 100%;
     height: 40px;
     font-size: 15px;
     padding: 0 10px 0px;
     /* border: 1px solid; */
     border: 1px solid #ccc;
 }
-.form-group  input,.form-group select.multiple
+.form-group.multiple
 {
     width: 100%;
-    height: auto;
 }
-.form-group  input,.form-group select.multiple option
+.form-group  input
+{
+    width: 100%;
+    height: 40px;
+}
+.form-group.select select,.form-group.halfwidth select
+{
+    height: 40px;
+}
+.form-group.select select,.form-group.select,.form-group.multiple,.form-group.multiple select,.form-group.halfwidth select
+{
+    width: 100%;
+    display: block;
+}
+
+.form-group select.multiple option
 {
     font-size: 20px;
 }
+.form-group.fullwidth
+{
+    width: 100%;
+}
+.form-group.halfwidth
+{
+    width: 45%;
+}
+
+
 .form-submit
 {
     margin: 10px 10px 20px 10px
 }
-.form-group input
-{
-    height: 40px;
-}
+
 .form-submit button
 {
     border: navajowhite;
@@ -972,18 +1007,20 @@ z-index: 3;
     background: var(--successful-color);
     color: var(--main-bg-color);
 }
+.session-results.danger
+{ 
+      background: var(--danger-color);
 
-
-/* users form */
-.popup.posts
-{
-    max-width: 900px;
-    top: -400px;
- 
-    left: 50%;
 }
-.posts-form .form-items {
-    display: flex;
+
+
+ .popup.posts
+{
+
+}
+.posts-form .form-group {
+        margin: 10px 0;
+        width: 100%;
 }
 
 .posts-form .form-items textarea
@@ -1003,13 +1040,113 @@ z-index: 3;
 } 
 
 .posts-form .form-items .divflex .form-group {
-    width: 33%;
+    width: 100%;
 }
 
-/* posts form */
-.posts-form .form-items {
-    flex-wrap: wrap;
+
+
+/* tags */
+
+.tag-container
+
+{
+	border: 2px solid #eee;
+	padding: 8px;
+	display: flex;
+	flex-wrap: wrap;
 }
-.posts-form .form-items .form-group {
-    width: 100%;
+.tag
+{
+	margin: 6px;
+	padding: 6px;
+	background: #f2f2f2;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	
+}
+.tag i
+{
+	margin-left: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+}
+.tag-container input
+{
+	border: 0;
+	outline : none;
+	font-size: 18px;
+	flex: 1;
+}
+.tag-container input:focus
+{
+		outline : none;
+}
+
+
+/* settigns page */
+
+.form-wraper
+{
+
+    padding: 0 30px;
+    margin: auto;
+}
+.not-popup-form
+{
+    background: var(--main-bg-color);
+    margin: 100px auto;
+}
+
+/*  breadcrumb */
+
+.breadcrumbnav 
+{
+    background: var(--main-bg-color);
+    padding: 10px;
+    margin: 20px;
+}
+.breadcrumbnav  .breadcrumb 
+{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.breadcrumbnav  .breadcrumb .breadcrumb-item
+{
+   
+    position: relative;
+
+    
+}
+.breadcrumbnav  .breadcrumb .breadcrumb-item a
+{
+    text-decoration: none;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.breadcrumbnav  .breadcrumb .breadcrumb-item a:active
+{
+    text-decoration: underline;
+    color: blue;
+}
+.breadcrumbnav  .breadcrumb .breadcrumb-item a i
+{
+    margin: 0 4px;
+}
+.breadcrumbnav  .breadcrumb .breadcrumb-item:not(:first-child)::before
+{
+    content: " / ";
+    position: relative;
+    font-size: 20px;
+    margin: 0 10px;
+  
+    color: var(--main-color);
+}
+
+.details
+{
+    
 }

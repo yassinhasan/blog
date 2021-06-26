@@ -7,6 +7,8 @@ class NavController extends Controller
 
     public function index()
     {
-        return $this->view->render("admin/common/nav");
+        $user = $this->load->model("login")->user();
+        $data['image'] = $user->image;
+        return $this->view->render("admin/common/nav",$data);
     }
 }

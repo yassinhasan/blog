@@ -9,7 +9,7 @@
                             </div>
                             <div class="results"></div>
                             <div class="form-items">
-                                <div class="form-group">
+                                <div class="form-group fullwidth">
                                     <label for="categoryname">
                                         Category Name
                                     </label>
@@ -22,7 +22,7 @@
                                     <label for="categoryname">
                                         Status
                                     </label>
-                                    <select name="status">
+                                    <select name="status" class="multiple">
                                         <option value="" >select category  status</option>
                                         <option value="enabled"  <?=isset($status) AND $status=== 'enabled' ? 'selected' : "" ?>>Enabled</option>
                                         <option value="Disabled" <?= isset($status) AND $status=== 'enabled' ? 'disabled' : "" ?>>Disabled</option>                                          

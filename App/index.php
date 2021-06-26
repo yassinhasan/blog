@@ -17,7 +17,7 @@ $app->SHARE("layout",function($app){
 $app->load->controller("Admin\Access")->index();
 
 
-$app->route->add_route("/","Home");
+$app->route->add_route("/","Blog/Blog");
 
 
 
@@ -38,31 +38,32 @@ $app->route->add_route("/","Home");
  // لو لقيته تمام بقوله حملي الكلاس
  // logincontroller 
  // وشغلي الميثود فيه الي هيا
- // submit 
+ // submit  done
  $app->route->add_route("users/login/submit","Admin/Login@submit","POST");
  $app->route->add_route("users/logout","Admin/Logout");
 
 
- // dashboard
+ // dashboard done
 
  $app->route->add_route("admin/dashobard","Admin/Dashobard");
  $app->route->add_route("admin","Admin/Dashobard");
  $app->route->add_route("admin/dashboard/add","Admin/Dashobard@add");
  $app->route->add_route("admin/dashboard/submit","Admin/Dashobard@submit");
 
-// logout
+// logout done
 
 //  $app->route->add_route("/logout","Logout");
 
-  //cateogry 
-
+  //cateogry  done
+ 
   $app->route->add_route("admin/categorys","Admin/Categorys");
   $app->route->add_route("admin/categorys/add","Admin/Categorys@add");
   $app->route->add_route("admin/categorys/submit","Admin/Categorys@submit","POST");
   $app->route->add_route("admin/categorys/edit/:id","Admin/Categorys@edit");
   $app->route->add_route("admin/categorys/save/:id","Admin/Categorys@save","POST");
   $app->route->add_route("admin/categorys/delete/:id","Admin/Categorys@delete");
- //users 
+
+ //users  done
 
  $app->route->add_route("admin/users","Admin/Users");
  $app->route->add_route("admin/users/add","Admin/Users@add");
@@ -72,7 +73,7 @@ $app->route->add_route("/","Home");
  $app->route->add_route("admin/users/delete/:id","Admin/Users@delete");
 
 
- //usersg-groups
+ //usersg-groups done
 
  $app->route->add_route("admin/users-groups","Admin/UsersGroups");
  $app->route->add_route("admin/users-groups/add","Admin/UsersGroups@add");
@@ -81,7 +82,7 @@ $app->route->add_route("/","Home");
  $app->route->add_route("admin/users-groups/save/:id","Admin/UsersGroups@save","POST");
  $app->route->add_route("admin/users-groups/delete/:id","Admin/UsersGroups@delete");
 
-  //posts 
+  //posts  done
 
   $app->route->add_route("admin/posts","Admin/Posts");
   $app->route->add_route("admin/posts/add","Admin/Posts@add");
@@ -97,14 +98,24 @@ $app->route->add_route("/","Home");
 
 
 
-    //posts 
+    //ads done
 
     $app->route->add_route("admin/ads","Admin/Ads");
-    $app->route->add_route("admin/ads/add","Admin/Ads@add");
+    $app->route->add_route("admin/ads/add","Admin/Ads@add","POST");
     $app->route->add_route("admin/ads/submit","Admin/Ads@submit","POST");
-    $app->route->add_route("admin/ads/edit/:id","Admin/Ads@edit");
+    $app->route->add_route("admin/ads/edit/:id","Admin/Ads@edit","POST");
     $app->route->add_route("admin/ads/save/:id","Admin/Ads@save","POST");
-    $app->route->add_route("admin/ads/delete/:id","Admin/Ads@delete");
+    $app->route->add_route("admin/ads/delete/:id","Admin/Ads@delete","POST");
+
+
+    //profile done
+
+    $app->route->add_route("admin/profile","Admin/Profile");
+    $app->route->add_route("admin/profile/save/:id","Admin/Profile@save","POST");
+
+
+    
+
     // admin settings 
 
     $app->route->add_route("admin/settings","Admin/Settings");

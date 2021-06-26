@@ -18,6 +18,8 @@ class DataBase
     private $limit;
     private $offset ;
     private $orderby = [];
+    private $groupby;
+    private $having = [];
     private $rows = 0;
 
 
@@ -118,7 +120,7 @@ class DataBase
         return $sql;
     }
 
-    //  ->wheres("id = ? " , 1) will take sql and bindings  and return this
+    //  ->wheres("id = ? " , $id) will take sql and bindings  and return this
     // will take sql from array_shift
     // and this second args will be array li [0 => 4]
     // will enter add to addtobindings($value)
@@ -141,7 +143,33 @@ class DataBase
         // sql here will be [0 => id = ? , name = ?]
         // when implode will be  = "id = ? , name = ?"
         // then add " where  before it
+        
         $this->wheres[] = $sql;
+        return $this;
+    }
+
+    // $posts = $this->load->model("posts")->select ("count(id) as number_of_posts" )->groupby("category_id")->having( " category_id   <  ? " , 1)->fetchall("posts");
+
+    public function having(...$bindings)
+    {        
+        $sql = array_shift($bindings);
+
+        if(count($bindings) == 1 AND  is_array($bindings[0]))
+        {
+                $bindings = $bindings[0];
+                $this->addtobinding($bindings);
+        }
+        else
+        {
+            $this->addtobinding($bindings);
+        }
+    
+        // where['id = ? , name = ? '] convert to string by implode(" ",$this->wheres);
+        // sql here will be [0 => id = ? , name = ?]
+        // when implode will be  = "id = ? , name = ?"
+        // then add " where  before it
+        
+        $this->having[] = $sql;
         return $this;
     }
     
@@ -298,6 +326,12 @@ class DataBase
         $this->orderby = [$orderby ,$sort];
         return $this;
     }
+    public function groupby($groupby)
+    {
+        $this->groupby = $groupby;
+        return $this;
+    }
+
 
     // fetch one will return std class object 
 
@@ -336,6 +370,7 @@ class DataBase
     public function fetchstatment()
     {
         $sql = " SELECT ";
+        
         if($this->select)
         {
             $sql .= \implode(" , " , $this->select);
@@ -350,6 +385,16 @@ class DataBase
         if($this->join)
         {
             $sql .= \implode(" " , $this->join);
+        }
+
+        if($this->groupby)
+        {
+            $sql.= " GROUP BY ".$this->groupby;
+        }
+
+        if($this->having)
+        {
+            $sql.= " HAVING ".implode(" , ",$this->having);
         }
 
         if($this->orderby)
@@ -410,6 +455,8 @@ class DataBase
         $this->limit= null;
         $this->offset = null ;
         $this->orderby = [];
+        $this->groupby = null;
+        $this->having = [];
     }
 
 

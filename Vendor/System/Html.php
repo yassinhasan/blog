@@ -7,7 +7,7 @@ class Html
     private $title;
     private $descrpition;
     private $keywords;
-    private $class;
+    private $breadcrumb;
 
 
     public function __construct(Application $app)
@@ -24,14 +24,14 @@ class Html
     {
         return $this->title;
     }
-    public function setclass($class)
+    public function setbreadcrumb($breadcrumb)
     {
-        $this->class = $class;
+        $this->breadcrumb = $breadcrumb;
     }
 
-    public function getclass()
+    public function getbreadcrumb()
     {
-        return $this->class;
+        return $this->breadcrumb;
     }
     public function setdesc($descrpition)
     {

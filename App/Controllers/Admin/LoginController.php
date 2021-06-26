@@ -14,13 +14,12 @@ class LoginController extends Controller
        
         $loginmode = $this->load->model("login");
         
-       // pre($this->cookie->all());
+       
 
         if( $loginmode->isloggined() )
         {
-           
-          //  $this->url->redirect("admin");
-           $this->url->redirect("/");
+        
+          $this->url->redirect("/");
         }
 
 

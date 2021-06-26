@@ -17,7 +17,7 @@ class UploadFile
     private $savedname;
     const DS = DIRECTORY_SEPARATOR;
 
-    const ALLOWED_EXTENSION = ["jpeg" , "gif" , "png" , "jfif"];
+    const ALLOWED_EXTENSION = ["jpeg" , "gif" , "png" , "jfif", "jpg"];
 
     public function __construct($input)
     {

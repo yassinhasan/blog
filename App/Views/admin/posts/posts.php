@@ -24,6 +24,7 @@
                             data-target-url="<?= fullurl("admin/posts/add") ?>"
                             > Add New Posts </button>
                         </div>
+                        
                     </div>
                         <table>
                             <thead>
@@ -42,6 +43,9 @@
                                     </th>
                                     <th>
                                     category
+                                    </th>
+                                    <th>
+                                    tags 
                                     </th>
                                     <th>
                                     image
@@ -73,14 +77,26 @@
                                     <?= $post->first_name." ".$post->last_name ?>
                                     </td>
                                     <td>
-                                    <?= $post->details?>
+                                    <?php
+                                      if(strlen($post->details) > 100 )
+                                    {
+                                      echo  substr($post->details, 0 , 100);
+                                    }
+                                    else
+                                    {
+                                        echo $post->details;
+                                    }
+                                    ?>
                                     </td>
                                     <td>
                                     <?= $post->name?>
                                     </td>
                                     <td>
+                                    <?=  $post->tags?>
+                                    </td>
+                                    <td>
                                     <img src=" <?= mlink("uploades/posts/images/".$post->image)?>"
-                                     class="table-avatar">    
+                                     class="table-avatar" alt="test">    
                                     </td>
                                     <td>
                                     <?= date("Y-m-d",$post->created)?>
@@ -106,9 +122,8 @@
                    
                 </div>
 
-            </div>
-            <div class="popup-container">
-            </div>
+            <div class="popup-container hide">
+        
 
 
 

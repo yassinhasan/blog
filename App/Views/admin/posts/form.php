@@ -6,18 +6,10 @@
                         <div class="box">
                             <div class="form-name"> 
                                 Add New Posts
+
+                              
                             </div>
-                            <!-- 
-
-                                title
-                                details
-                                tags
-                                related_posts
-                                category
-                                status
-                                image
-
-
+                            <!--
                              -->
                             <div class="results"></div>
                             <div class="form-items">
@@ -34,16 +26,15 @@
                                     <label for="details">
                                     details
                                     </label>
-                                    <textarea name="details" id="details" class="details"><?= isset($title) ? $title : "" ?></textarea> 
+                                    <textarea name="details" id="details" class="details"><?= isset($details) ? $details : "" ?></textarea> 
                                 </div>
                                 <div class="form-group">
                                     <label for="tags">
                                     tags  
                                     </label>
-                                    <input type="text" name="tags" placeholder=""
-                                    value="<?= isset($tags) ? $tags : "" ?>"
-                                    class="form-input"
-                                    >
+                                    <div class="tag-container">
+                                        <input class="tag-input" name="tags" type="text" data-value="<?= $tags ?>"/>
+                                    </div>
                                 </div>
                                 <div class="divflex">
                                     <div class="form-group select">
@@ -73,7 +64,7 @@
                                             <option value="Disabled" <?= (isset($status) &&  $status === 'disabled') ? 'selected' : "" ?>>Disabled</option>                                          
                                         </select>
                                     </div>
-                                    <div class="form-group select">
+                                    <div class="form-group multiple">
                                         <label for="related_posts">
                                         related_posts
                                         </label>

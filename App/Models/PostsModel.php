@@ -38,8 +38,25 @@ class PostsModel extends Model
  
         $user  = $this->load->model("login")->user();
 
-        $image = $this->request->file("image");
-        $imagename = $image->moveto($this->file->toupload("posts/images"))->savedname();
+        
+        $postsmodel = $this->getbyid($id);
+
+
+            
+            $imagename = "";
+            if($_FILES['image']['error'] ===4)
+            {
+                $imagename = $postsmodel->image;
+
+            }
+            else
+            {
+                $image = $this->request->file("image");
+               $imagename = $image->moveto($this->file->toupload("posts/images"))->savedname();
+            }
+        
+        //$image = $this->request->file("image");
+       // $imagename = $image->moveto($this->file->toupload("posts/images"))->savedname();
         $result =   (bool)  $this->data([
 
             "user_id" => $user->id,
@@ -80,6 +97,28 @@ class PostsModel extends Model
      
         return $allpostsinfo;
 
+    }
+
+    
+    public function get_latest_posts()
+    {
+        $latestposts = $this->select(" p.* , c.name as category_name , u.first_name , u.last_name ")->from("posts p")
+            ->join(" left join categories c on p.category_id = c.id ")
+            ->join(" left join users u on p.user_id = u.id ")
+            ->orderby( " id " , "desc")
+            ->fetchAll();
+            return $latestposts;
+            
+    }
+
+    public function getcategory_posts()
+    {
+        $getcategory_posts = $this->select(" COUNT(p.id) as number_of_posts , c.name as category_name")->from("posts p")
+        ->join(" left join categories c on p.category_id = c.id ")
+        ->groupby( "p.category_id ")
+
+        ->fetchAll();
+        return $getcategory_posts;
     }
 
 

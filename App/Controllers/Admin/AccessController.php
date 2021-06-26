@@ -24,12 +24,22 @@ class AccessController extends Controller
             
             // if not loged goto to login page but if it's already loggin bage so donot repeat it so ignore it 
 
+            // !in_array($currenturl , $exceptionurl) mean this user  is not loged and try to access admin page
+
             if(! $logeuser->isloggined()  AND  !in_array($currenturl , $exceptionurl)) 
             {
                 
-               
-               $this->url->redirect("users/login");
+              $this->url->redirect("users/login");
             }
+
+            // he is not loged and now in any of allowed public pages
+
+            // if( ! $logeuser->isloggined()) 
+            // {
+            //     pre($this->cookie->all());
+            //     echo "yes";
+            //    return false;
+            // }
             
             if($logeuser->isloggined() )
             {
@@ -42,12 +52,14 @@ class AccessController extends Controller
                 
                 $allowedurl =   $pagesmodel->getallowedpages($id);
                 $newcurrenturl= preg_replace("/\/[0-9]{1,}$/" , "/:id" ,$currenturl);
+
+
                if(! in_array($newcurrenturl , $allowedurl) AND !in_array($currenturl , $exceptionurl)) 
                 {
                     //     pre($newcurrenturl);
                     //    pre($allowedurl);
-             
-               $this->url->redirect("accessdenied");
+ 
+                $this->url->redirect("accessdenied");
                 }
 
                 

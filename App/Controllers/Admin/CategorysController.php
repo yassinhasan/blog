@@ -22,7 +22,7 @@ class CategorysController extends Controller
 
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("categoires");
-     $this->html->setclass("categoires");
+     $this->html->setbreadcrumb("categorys");
 
      // load all category to add them in lists
      $data['allcategoryes']  = $this->load->model("category")->getall();
@@ -42,7 +42,7 @@ class CategorysController extends Controller
         $id = $id[0];
 
         $this->html->settitle("Update categoires");
-        $this->html->setclass("active");
+        $this->html->setbreadcrumb("categorys");
     
         // load all category to add them in lists
 

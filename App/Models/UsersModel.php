@@ -37,6 +37,7 @@ class UsersModel extends Model
 
     public function save($id)
     {
+
         $image = $this->request->file("image");
         $imagename = $image->moveto($this->file->toupload("images"))->savedname();
         $result =   (bool)  $this->data([
@@ -77,6 +78,38 @@ class UsersModel extends Model
       $alluserinfo =  $this->select(" u.*, ug.name")->from("users u")->join(" join users_group ug on u.user_group_id = ug.id")->where(" u.id =  ? " , $id )->fetch();
      
         return $alluserinfo;
+    }
+
+
+    public function update($id)
+    {
+        $user = $this->getbyid($id);
+        $imagename = "";
+        if($_FILES['image']['error'] === 4)
+        {
+            $imagename = $user->image;
+
+        }
+        else
+        {
+            $image = $this->request->file("image");
+            $imagename = $image->moveto($this->file->toupload("images"))->savedname();
+  
+         
+      }
+        $result =   (bool)  $this->data([
+
+            "first_name" => $this->request->post("first_name"),
+            "last_name" => $this->request->post("last_name"),
+            "email" => $this->request->post("email"),
+            "image" =>$imagename,
+            "gender" => $this->request->post("gender"),
+            "birthday" => strtotime($this->request->post("birthday")),
+            "status" => $this->request->post("status"),
+        
+        
+        ])->where(' id = ? ' , $id)->update($this->tablename);
+        return $result;
     }
 
 

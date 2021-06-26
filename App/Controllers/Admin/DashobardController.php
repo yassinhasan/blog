@@ -7,7 +7,11 @@ class DashobardController extends Controller
 
     public function index()
     {
-     return $this->view->render("admin/dashboard");
+
+        $data['title']  = "DASHBOARD";
+        $data['users'] = $this->load->model("users")->getall();
+
+        echo   $this->layout->render($this->view->render("admin/dashboard",$data));
     }
 
     public function add()

@@ -11,7 +11,7 @@ class UsersController extends Controller
 
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("users");
-     $this->html->setclass("users");
+     $this->html->setbreadcrumb("users");
 
      // load all users to add them in lists
      $data['allusers']  = $this->load->model("users")->getall();
@@ -31,7 +31,7 @@ class UsersController extends Controller
         $id = $id[0];
 
         $this->html->settitle("Update users");
-        $this->html->setclass("active");
+        $this->html->setbreadcrumb("active");
     
         // load all users to add them in lists
 

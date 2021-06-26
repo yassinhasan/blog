@@ -11,7 +11,7 @@ class  Cookie
     // 3600 equal to 1 hr
     public function setcookie($key,$value , $timeinhour = 10)
     {
-        \setcookie($key,$value,\time() +  $timeinhour * 3600 , "","", false ,true );
+        \setcookie($key,$value,\time() +  $timeinhour * 3600 , "/","", false ,true );
     }
 
     public function get($key)
@@ -21,7 +21,7 @@ class  Cookie
 
     public function remove($key)
     {
-        \setcookie($key,null, -1 , "","", false ,true );
+        \setcookie($key,null, -1 , "/","", false ,true );
         if(isset($_COOKIE[$key]))
         {
             unset($_COOKIE[$key]);

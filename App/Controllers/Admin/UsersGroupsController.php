@@ -12,7 +12,7 @@ class UsersGroupsController extends Controller
         $data['session_results'] = $this->session->has("success") ? $this->session->pull("success") : null ;
         $data['usersgroups'] = $usersgroups;
         $this->html->settitle("users group ");
-        $this->html->setclass("users-group");
+        $this->html->setbreadcrumb("users-groups");
      
       echo  $this->layout->render($this->view->render("admin/usersgroups/usersgroups",$data));
         

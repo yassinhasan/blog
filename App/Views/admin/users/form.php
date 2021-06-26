@@ -27,7 +27,7 @@
                                     class="form-input"
                                     >
                                 </div>
-                                <div class="form-group select">
+                                <div class="form-group halfwidth">
                                     <label for="usersname">
                                         groups
                                     </label>
@@ -44,7 +44,7 @@
                                     </select>
                                     
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group halfwidth">
                                     <label for="usersname">
                                         email  
                                     </label>
@@ -65,7 +65,7 @@
                                     </label>
                                     <input type="password" name="cpassword"  class="form-input">
                                 </div>
-                                <div class="form-group select">
+                                <div class="form-group halfwidth">
                                     <label for="usersname">
                                         Status
                                     </label>
@@ -75,7 +75,7 @@
                                         <option value="Disabled" <?= (isset($status) &&  $status === 'disabled') ? 'selected' : "" ?>>Disabled</option>                                          
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group halfwidth">
                                     <label for="birthday">
                                         birthday  
                                     </label>
@@ -84,7 +84,7 @@
                                     class="form-input"
                                     >
                                 </div>
-                                <div class="form-group select">
+                                <div class="form-group halfwidth">
                                     <label for="gender">
                                     gender
                                     </label>

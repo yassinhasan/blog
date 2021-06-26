@@ -137,5 +137,19 @@
             show all contacts
             and show messages
             and edit it
+
+
+
+
+                    <h1> hello worlod  and i love </h1>
+        <i class="fas fa-sign-in-alt"></i>
+        <a href="<?= fullurl("users/login")?>"><span>login</span></a>
+        <br>
+        <i class="fas fa-power-off"></i>
+        <a href="<?= fullurl("users/logout")?>"><span>logout</span></a>
+        <br>
+        <i class="fas fa-home"></i>
+        <a href="<?= fullurl("admin")?>"><span>admin page</span></a>
+
         */
         

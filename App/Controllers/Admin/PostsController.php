@@ -11,7 +11,7 @@ class PostsController extends Controller
 
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("posts");
-     $this->html->setclass("posts");
+     $this->html->setbreadcrumb("posts");
 
      // load all posts to add them in lists
      $data['allposts']  = $this->load->model("posts")->getallposts();
@@ -31,13 +31,8 @@ class PostsController extends Controller
         $id = $id[0];
 
         $this->html->settitle("Update posts");
-        $this->html->setclass("active");
+        $this->html->setbreadcrumb("active");
     
-        // load all posts to add them in lists
-
-        /**
-        * todo // check id if exists ok if not redirect to main posts page
-        */
         $postsmodel = $this->load->model("posts");
         $posts =  $postsmodel->getbyid($id);
        return $this->form($posts);
@@ -48,19 +43,10 @@ class PostsController extends Controller
     {
         if($posts !=null)
         {
-            /*
-                                title
-                                details
-                                tags
-                                related_posts
-                                category
-                                
-                                image
-            */
             $data['posts']  = $this->load->model("posts")->getall();
             $data['id'] = $posts->id;
             $data['title'] = $posts->title;
-            $data['details'] = $posts->details;
+            $data['details'] = $posts->details ;
             $data['tags'] = $posts->tags;
             $data['categorys']  = $this->load->model("Category")->getall();
             $data['post_category'] = $posts->category_id;
@@ -87,19 +73,13 @@ class PostsController extends Controller
     {
         $json = [];
 
-        
         if($this->isvalid())
         {
-
             $posts  = $this->load->model("posts");
-
-
             if($posts->insertnewposts())
             {
              $json['success'] = "Posts added Succsefuuly";               
             }
-
-
         }
         else
         {
@@ -111,49 +91,34 @@ class PostsController extends Controller
     }
 
 
-    // validata data of catgoery before add it to dayabase
-
-    public function isvalid()
+    public function isvalid($id = null)
     {
-
-        
+        $this->validator->required("title")
+        ->required("category_id")
+        ->required("details")
+        ->required("tags")
+        ->required("status")
+        ->required("related_posts");
        
       // $related_posts = implode("," ,array_filter($related_posts, "is_numeric"));
-        $this->validator->required("title")
-                        ->required("category_id")
-                        ->required("details")
-                        ->required("tags")
-                        ->required("status")
-                        ->required("related_posts")
-                     ->image("image");
-                   
+        if($id == null)
+        {
+            $this->validator->image("image");
+        }        
         return $this->validator->pass();
     }
-
-
 
     public function save($id)
     {
         $id = $id[0];
-
-    
         $json = [];
-        // first get data and check if valid or no
-        // if valid so insert it into table posts
-
-  
-
-        if($this->isvalid())
+        if($this->isvalid($id))
         {
-            // here data is alrady valid so insert it into model class
-            // model class will creat new row of data 
+        $posts  = $this->load->model("posts");
+        $posts->save($id);
 
-            $posts  = $this->load->model("posts");
-
-            $posts->save($id);
-
-            $json['success'] = "Posts updated Succsefuuly";
-            $json['redirect'] = fullurl("admin/posts/posts");
+        $json['success'] = "Posts updated Succsefuuly";
+        $json['redirect'] = fullurl("admin/posts/posts");
         }
         else
         {
@@ -165,14 +130,10 @@ class PostsController extends Controller
     }
     public function delete($id)
     {
-         $id = $id[0];
-        // first get data and check if valid or no
-        // if valid so insert it into table posts
-            // here data is alrady valid so insert it into model class
-            // model class will creat new row of data 
-            $posts  = $this->load->model("posts");
+        $id = $id[0];
+        $posts  = $this->load->model("posts");
 
-           if( $posts->delete($id))
+        if( $posts->delete($id))
            {
             $this->session->set('success',"Posts deleted Succsefuuly");
             $json['redirect'] = fullurl("admin/posts");   
@@ -180,11 +141,11 @@ class PostsController extends Controller
            else
            {
             $json['error'] = "error";
-           }
+        }
 
 
 
-            $this->json($json);
+         $this->json($json);
          
     }
 

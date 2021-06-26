@@ -68,9 +68,8 @@
                    
                 </div>
 
-            </div>
-            <div class="popup-container">
-            </div>
+            <div class="popup-container hide">
+         
 
 
 

@@ -21,12 +21,12 @@
                                     >
                                 </div>
                             </div>
-                            <div class="form-group select">
+                            <div class="form-group multiple">
                                     <label for="usersgroups">
                                         all pages 
                                      
                                     </label>
-                                    <select name="pages[]" multiple id="usersgroups" class="multiple">
+                                    <select name="pages[]" multiple id="usersgroups" class="multiple" >
                                     <?php 
                                         foreach($allpages as $page)
                                         { ?>

@@ -79,7 +79,7 @@
 
                 <div class="avatar-area">
                     <div class="theavatar">
-                        <img class="logo-img hasdropdwon" alt="avatar" src=" <?= mlink('admin/images/avatar.png') ?>">
+                        <img class="logo-img hasdropdwon" alt="avatar" src=" <?= mlink("uploades/images/$image") ?>">
                     </div>
                         <div class="dropdown-menu settings">
                             <div class="box">
@@ -89,8 +89,8 @@
 
                                 </div>  
                                 <div class="dropdown-item">
-                                    <i class="fas fa-cog"></i>
-                                    <span>profile</span>
+                                    <i class="fas fa-user"></i>
+                                    <a href="<?= fullurl("admin/profile")?>"> <span>profile</span></a>
                                 </div>  
                                 <div class="dropdown-item">
                                     <i class="fas fa-sign-in-alt"></i>
