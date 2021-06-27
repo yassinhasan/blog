@@ -6,6 +6,7 @@ class Route
     private $app;
     private $routes = [];
     private $notfound;
+    private $currentroute;
 
     public function __construct(Application $app)
     {
@@ -70,7 +71,7 @@ class Route
             if($this->ismatching($route['pattern']))
             {
                
-                
+                $this->currentroute = $route['url'];
                 $args = $this->argumentfrom($route['pattern']);
                 
                 list($controller,$method) = explode("@",$route['action']);
@@ -90,6 +91,7 @@ class Route
 
     public function ismatching($pattern)
     {
+
        return preg_match($pattern,$this->app->request->url());
 
     }
@@ -105,6 +107,11 @@ class Route
     public function grtroutes()
     {
         return $this->routes;
+    }
+
+    public function currentroute()
+    {
+        return $this->currentroute;
     }
 }
 

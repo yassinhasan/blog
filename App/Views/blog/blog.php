@@ -201,7 +201,7 @@
                     </div>
                     <div class="post-content">
                         <p class="p">
-                            <?= $post->details; ?>
+                            <?= read_more($post->details , 40); ?>
                         </p>
                     </div>
                     <div>
@@ -248,116 +248,34 @@
                             <div class="h2 text-color">
                                 popular category
                             </div>
+                            <?php
+                            foreach($ads as $ad)
+                            { ?>
+
                             <div class="posts-box">
                                 <div>
                                     <div class="post-img-box">
                                         <div class="post-img">
-                                        <img src="<?= mlink("blog/images/background (5).jpg") ?>" alt="">
+                                        <img src=" <?= mlink("uploades/ads/images/".$ad->image)?>">
                                         </div>
                                         <div class="post-info">
                                             <span >
                                                 <i class="fas fa-calendar"></i>
-                                                14, 08 , 1988
+                                                <?= date("Y-m-d",$ad->start_at) ?>
                                             </span>
                                             <span >
-                                                <i class="fas fa-comments"></i>
-                                                3 comments
+                                                <i class="fas fa-calendar"></i>
+                                                <?= date("Y-m-d",$ad->end_at) ?>
                                             </span>
                                          </div>
                                     </div>
                                 </div>
                                 <div class="post-title">
-                                <h3 class="post-heading"> this is about expan peneftis and it's good quality product</h3>
+                                <h3 class="post-heading"><?= $ad->name?></h3>
                                 </div>
                             </div>
-                            <div class="posts-box">
-                                <div>
-                                    <div class="post-img-box">
-                                        <div class="post-img">
-                                        <img src="<?= mlink("blog/images/background (3).jpg") ?>" alt="">
-                                        </div>
-                                        <div class="post-info">
-                                            <span >
-                                                <i class="fas fa-calendar"></i>
-                                                14, 08 , 1988
-                                            </span>
-                                            <span >
-                                                <i class="fas fa-comments"></i>
-                                                3 comments
-                                            </span>
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="post-title">
-                                <h3 class="post-heading"> this is about expan peneftis and it's good quality product</h3>
-                                </div>
-                            </div>
-                            <div class="posts-box">
-                                <div>
-                                    <div class="post-img-box">
-                                        <div class="post-img">
-                                        <img src="<?= mlink("blog/images/background (4).jpg") ?>" alt="">
-                                        </div>
-                                        <div class="post-info">
-                                            <span >
-                                                <i class="fas fa-calendar"></i>
-                                                14, 08 , 1988
-                                            </span>
-                                            <span >
-                                                <i class="fas fa-comments"></i>
-                                                3 comments
-                                            </span>
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="post-title">
-                                <h3 class="post-heading"> this is about expan peneftis and it's good quality product</h3>
-                                </div>
-                            </div>
-                            <div class="posts-box">
-                                <div>
-                                    <div class="post-img-box">
-                                        <div class="post-img">
-                                        <img src="<?= mlink("blog/images/background (1).jpg") ?>" alt="">
-                                        </div>
-                                        <div class="post-info">
-                                            <span >
-                                                <i class="fas fa-calendar"></i>
-                                                14, 08 , 1988
-                                            </span>
-                                            <span >
-                                                <i class="fas fa-comments"></i>
-                                                3 comments
-                                            </span>
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="post-title">
-                                <h3 class="post-heading"> this is about expan peneftis and it's good quality product</h3>
-                                </div>
-                            </div>
-                            <div class="posts-box">
-                                <div>
-                                    <div class="post-img-box">
-                                        <div class="post-img">
-                                        <img src="<?= mlink("blog/images/background (2).jpg") ?>" alt="">
-                                        </div>
-                                        <div class="post-info">
-                                            <span >
-                                                <i class="fas fa-calendar"></i>
-                                                14, 08 , 1988
-                                            </span>
-                                            <span >
-                                                <i class="fas fa-comments"></i>
-                                                3 comments
-                                            </span>
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="post-title">
-                                <h3 class="post-heading"> this is about expan peneftis and it's good quality product</h3>
-                                </div>
-                            </div>
+                            <?php }
+                            ?>
                         </div>
 
                         <!-- news letter -->

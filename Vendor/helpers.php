@@ -83,3 +83,21 @@ if(!function_exists("fullurl"))
         return $path;
     }
 }
+
+if(!function_exists("read_more"))
+{
+    function read_more($string , $number_0f_words)
+    {
+        $totalwords = array_filter(explode(" ",$string));
+
+        
+        if(count($totalwords) <= $number_0f_words)
+        {
+            return $string;
+        }
+        else
+        {
+            return implode(" ",array_splice($totalwords,0,$number_0f_words))." ... ";
+        }
+    }
+}

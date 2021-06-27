@@ -70,19 +70,32 @@ class AdsModel extends Model
     }
 
 
-    public function getallroutes()
+    public function getadspages()
     {
         $pages = [];
         $allroutes  = $this->route->grtroutes();
             foreach($allroutes as $route)
             {
-                if(! preg_match("#admin#",$route['url']))
+                if(! preg_match("#admin#",$route['url']) AND ! preg_match("#users#",$route['url']))
                 {
                     $pages[] = $route['url'];
                 }
             }
         return $pages;    
     }
+
+
+    public function enabled_ads()
+    {
+        $currentroute = $this->route->currentroute();
+        $now = time();
+        	
+
+
+           return $this->from("ads")->where(" pages like ? AND start_at <= ? AND end_at >= ? AND status = ? " , "%$currentroute%" , $now , $now , "enabled")->fetchALL();
+  
+    }
+
 
 
 }

@@ -64,7 +64,7 @@
                                     <label for="start-at">
                                         start at  
                                     </label>
-                                    <input type="date" name="start-at" 
+                                    <input type="date" name="start_at" 
                                     value="<?= isset($start_at) ? date("Y-m-d",$start_at) : "" ?>"
                                     class="form-input"
                                     >

@@ -6,8 +6,7 @@ class AdsController extends Controller
 {
     public function index()
     {
-
-
+        
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("ads");
      $this->html->setbreadcrumb("ads");
@@ -27,6 +26,7 @@ class AdsController extends Controller
     public function edit($id)
     {
         $id = $id[0];
+        // pre($this->route->currentroute());
         $this->html->settitle("Update ads");
         $this->html->setbreadcrumb("active");
         $ads = $this->load->model("ads")->getbyid($id);
@@ -36,7 +36,7 @@ class AdsController extends Controller
     public function form($ads = null)
     {
 
-        $pages = $this->load->model("ads")->getallroutes();
+        $pages = $this->load->model("ads")->getadspages();
 
         if($ads)
         {
