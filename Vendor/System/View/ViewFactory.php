@@ -12,7 +12,10 @@ class ViewFactory
         $this->app = $app;
     }
 
-    public function render($viewpath,$data=[])
+    // whey data=[] not =null beacuse i will extract it so if i make it null 
+    // exctract will return error
+    
+    public function render($viewpath,$data = [])
     {
         
       

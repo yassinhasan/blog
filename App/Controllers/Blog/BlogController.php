@@ -12,10 +12,9 @@ class BlogController extends Controller
 
     public function index()
     {
-        $data['ads']= $this->load->model("ads")->enabled_ads();
-        $data['posts'] = $this->load->model("posts")-> get_latest_posts();
-        $data['getcategory_posts'] = $this->load->model("posts")-> getcategory_posts();
-        echo  $this->view->render('blog/blog',$data);
+     
+        $data['title'] = $this->html->settitle($this->settings->getvalue("sitename"));
+        return $this->bloglayout->render(null,$data);
     }
     
 }

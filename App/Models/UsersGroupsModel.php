@@ -14,17 +14,15 @@ class UsersGroupsModel extends Model
 
         $selectedpages = $this->request->post("pages") ; 
 
-        foreach($selectedpages as $selectedpage)
+        if($selectedpages)
         {
-         $pagess =   $this->data(["pages" => $selectedpage, "users_group_id" => $usersgroupid])->insert("users_group_permessions");
-           
+           foreach($selectedpages as $selectedpage)
+        {
+         $this->data(["pages" => $selectedpage, "users_group_id" => $usersgroupid])->insert("users_group_permessions");
+
+        }
         }
 
-        if($pagess)
-        {
-            return true;
-        }
-      
 
     }
 

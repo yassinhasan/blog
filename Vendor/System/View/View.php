@@ -12,6 +12,8 @@ class View  extends Controller implements ViewInterface
     private $viewpath;
 
 
+    // this class will return view files
+
 
     public function __construct(Application $app,$viewpath,$data)
     {
@@ -22,6 +24,8 @@ class View  extends Controller implements ViewInterface
         
  
     }
+
+    // this function will prepare view paoth file and return it to $this->viewpath;
 
     public function prepareviewpath($viewpath)
     {
@@ -37,12 +41,24 @@ class View  extends Controller implements ViewInterface
       
     }
 
+
+    // i need this view will convert to string and this method will call automatic 
+    // when i write echo object from this class
+    // how to do this 
+    // first convert output from this class to string
+    // this output will be all output fromm view file and $data 
+    // then retutn it to this->output 
+    // no this->output contain string of all output of view file 
+    // now in function __tostring() i will echo this->output 
+
     public function getoutput()
     {
 
         if(is_null($this->output))
         {
             ob_start();
+            // must extract data before require
+            
             extract($this->data);
             require $this->viewpath;
             $this->output = ob_get_clean();
@@ -50,6 +66,7 @@ class View  extends Controller implements ViewInterface
         return  $this->output;
 
     }
+
 
     public function __toString()
     {

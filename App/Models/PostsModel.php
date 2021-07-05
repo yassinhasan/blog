@@ -102,24 +102,24 @@ class PostsModel extends Model
     
     public function get_latest_posts()
     {
-        $latestposts = $this->select(" p.* , c.name as category_name , u.first_name , u.last_name ")->from("posts p")
+
+        if(!$this->app->isshare("latestposts"))
+        {
+                    $latestposts = $this->select(" p.* , c.name as category_name , u.first_name , u.last_name ")->from("posts p")
             ->join(" left join categories c on p.category_id = c.id ")
             ->join(" left join users u on p.user_id = u.id ")
             ->orderby( " id " , "desc")
             ->fetchAll();
-            return $latestposts;
+            
+            $this->app->SHARE("latestposts" , $latestposts);
+        }
+
+        return $this->app->getobject("latestposts");
+
             
     }
 
-    public function getcategory_posts()
-    {
-        $getcategory_posts = $this->select(" COUNT(p.id) as number_of_posts , c.name as category_name")->from("posts p")
-        ->join(" left join categories c on p.category_id = c.id ")
-        ->groupby( "p.category_id ")
 
-        ->fetchAll();
-        return $getcategory_posts;
-    }
 
 
  

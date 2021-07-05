@@ -22,12 +22,27 @@ class Application
     {   
         $this->file = $file;
         $this->SHARE('file',$file);
+        // first i will call helper class will return helper file contain all file
+        // this class before everthing
+
         $this->helpers(); 
+
+        // here i call load class 
+
         $this->REGISTER_CLASS();
+
+        // this retun ro object that call this class
+
         static::$instance = $this;   
      
     }
 
+    // selftone object call only one object from this class
+    // how i will make $app  = application::getinstance(file class);
+    // here $app call function getinstance will check if static::instance is null
+    /// here is null so i will make static::instance = new instance(file class)
+    // and return this class
+    // second time when i make object frim this class i already call this class
     public static function getinstance($file = null)
     {
         if(is_null(static::$instance))
@@ -102,6 +117,12 @@ class Application
       public function getobject($key)
       {
   
+            // check if this classes is found in continaer or nor
+            // if found so return it's value == class
+            // if not found 
+            // check if found in coreclasses if found add it to share 
+            // fenish return this->container['key']
+
           if(!$this->isshare($key))
           {
               if($this->iscorealis($key))
@@ -115,10 +136,20 @@ class Application
           }
            return $this->container[$key];
       }
+
+      // return value that found in container 
+      // this value has added by share function wchic return object
+      // when i said $this->route 
+      // i need to search for route in container if not found
+      // check if found in coreclasses if found make object and return it so here i
+      // said when i write $propert nout found in this class
+      // please call this method $this->getobject()//
+
       public function __get($name)
       {
           return $this->getobject($name);
       }
+      
       private function helpers()
       {
         //   $this->file->require($this->file->vendor('helpers.php'));
@@ -176,19 +207,41 @@ class Application
     }
     public function run()
     {
+
+        // first start sessnio
         $this->session->start();
+        // then load index file which contain all routes file and access controller
+
         $this->file->requirefile("App/index.php");
+
+        // then prepare url from prepareurl function 
         $this->request->prepareurl();
+
+        // then from routes i will get all routes then make lloop to catch $controller,$action,$args
+
         list($controller,$method,$args) =  $this->route->getproperroute();
 
-    
+        
+        // then this controller to load class to call this function index or other function
+        // by this object from this controller
+        // like  $app->route->add_route("admin/dashboard/add","Admin/Dashobard@add");
+        // i will send Admin/Dashobard to load class to make object
+        // by App\Controllers\Admin\DashobardContrller
+        // and make function which i need to call 
+        // add()
+
+        // these function i need it to return string then this string will send as output to
+        // response 
+        // respone class will echo this outupt 
+        // by function setoutput so now will show every thing in controller class
+        // then send header as  header("header: value")
+
+
 
         $output = (string)$this->load->action($controller,$method,$args);
         
         $this->response->setoutput($output);
-        $this->response->send();
-     
-       
+        $this->response->send();     
 
     }
 

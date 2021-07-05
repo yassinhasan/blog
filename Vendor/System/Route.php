@@ -63,6 +63,20 @@ class Route
     {
         $this->notfound = $url;
     }
+    // this method will be call when i run app 
+    // so when  i make obhect if applciation class 
+    // i will call this method like this
+    // list ($controller,$action , $args) = $app->route->getproperroute();
+    // after this i will send them to $app->load->action($controller,$action,$args);
+    // this method will call this function which is $actoin by object $controller and args $args 
+    // how to do this
+    // i will make class $load this class have method $app->load->controller($controller);
+    // will take $controller and convert to object 
+    // save this controller in contater controller in load class
+    // check if !found in this controller so i will create new one else if return $app->load->controller['controller'];
+    // then at the end make fucntion action($controller)
+    // $this contrller will come fromm $this->load->controller($controller);
+    // then return callable function
     public function getproperroute()
     { 
         foreach($this->routes as $route)
@@ -97,7 +111,15 @@ class Route
     }
     public function argumentfrom($pattern)
     {
+        // like blog/posts/1 
+        // here pattern will be  #blog/posts/(/d)+$#
+        // so $matches will be array from 
+        // [0] => blog/posts/
+        // [1] => 1 
+        //  i will make shift so return only args whic will be id == 1 
          preg_match_all($pattern,$this->app->request->url(),$matches);
+
+          
          array_shift($matches);
          return $matches;
     }

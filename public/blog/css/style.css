@@ -1,5 +1,8 @@
 /* ###################### font ################################### */
 @import url("../css/fonts.css");
+/* import font poppins */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;1,600&display=swap');
+
 /* ##########x############ font #####################x############## */
 
 
@@ -25,6 +28,20 @@
     --Josefin     : 'Josefin Sans', sans-serif;
     --Lexend     : 'Lexend', sans-serif;
     --Livvic     : 'Livvic', sans-serif;
+
+    --main-color : #727475;
+    --main-bg-color : #fff;
+    --second-bg-color : #f1f1f1;
+  
+
+
+    --site-color : #a11d39;
+
+    --font-icon-size : 26px;
+    --image-size : 70px;
+
+    --successful-color : #009688;
+    --danger-color : #e91e63;
 
 
 }
@@ -138,7 +155,6 @@ ul
 {
     height: 0rem;
     min-height: 80px;
-    overflow: hidden;
     padding: 0 2rem;
     transition: all 0.5s;
     background-color: var(--light-background);
@@ -176,13 +192,27 @@ ul
     font-size: 1.1rem;
     font-family: var(--Anton);
     display: block;
+    display: flex;
+    justify-content: space-between;
 }
+.nav-item a i 
+{
+    margin-left: 6px;
+}
+.nav-item a img 
+{
+    
+    width: 30px;
+    margin-left: 10px;
+    position: relative;
+    top: -4px;
 
-.nav-item:hover
+}
+.nav-item:hover,.nav-item.active
 {
     background-color: var(--midnight);
 }
-.nav-item:hover a
+.nav-item:hover > a,.nav-item.active > a
 {
     color: var(--white-hover);
 }
@@ -225,7 +255,42 @@ ul
 }
 .nav.show
 {
-    min-height: 430px;
+    min-height: 500px;
+}
+
+.has-menu
+{
+    position: relative;
+}
+.has-menu:hover .dropdown-menu
+{
+    display: block;
+}
+.dropdown-menu
+{
+    position: absolute;
+    top: 97%;
+    z-index: 10000;
+    width: 180px;
+    /* background: rebeccapurple; */
+    background: white;
+    display: none;
+
+}
+.dropdown-menu li a
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-menu li:hover
+{
+        background-color: var(--midnight);
+}
+.dropdown-menu li:hover a
+{
+
+    color: var(--white)
 }
 /* ##########x############ nav #####################x############## */
 
@@ -272,6 +337,8 @@ main
 .container
 {
     padding: 90px 0;
+    max-width: 1200px;
+    margin: auto;
 }
 .main-post-box
 {
@@ -286,14 +353,17 @@ main
 }
 .main-post-box .posts 
 {
-    width: 60%;
-    margin-right: 7%;
+    width: 50%;
+    margin-right: 20%;
+    text-align: center;
 
 }
 .main-post-box .posts .post-img-box
 {
     position: relative;
     width: 500px;
+    text-align: center;
+    margin: auto;
 }
 .main-post-box .posts .post-img 
 {
@@ -343,21 +413,28 @@ main
 }
 .post-content 
 {
-    margin: 2.5rem 0;
+    /* margin: 2.5rem 0; */
+    margin: auto;
 }
 .btn.read-more 
 {
-    padding: .8rem 2.5rem;
+    /* padding: .8rem 2.5rem; */
 }
 .btn.read-more i 
 {
-    position: relative;
-    top: 4px;
+    /* position: relative;
+    top: 4px; */
 }
 hr
 {
     width: 100%;
     margin: 80px 0px;
+    opacity: 0;
+}
+.btn.read-more
+{
+    padding: 0.3rem 1.5rem;
+    font-size: 1rem;
 }
 /* ##########x############ main page #####################x############## */
 
@@ -639,6 +716,19 @@ margin-bottom: 15px;
     {
         display: initial;
     }
+    .main-post-box .posts .post-img-box
+    {
+        margin: auto;
+    }
+    .dropdown-menu
+    {
+        width: 100%;
+        background: var(--gradinat);
+    }
+    .dropdown-menu li a 
+    {
+        color: var(--white);
+    }
 }
 
 @media (min-width: 1024px) {
@@ -652,6 +742,7 @@ margin-bottom: 15px;
         display: block;
         width: 100%;
         margin-right: auto;
+        text-align: center;
     }
     .main-post-box .sidebar-info {
         display: block;
@@ -666,9 +757,13 @@ margin-bottom: 15px;
         margin-bottom: 27px;
         padding: 0 20px;
     }
+    .main-post-box .posts .post-img-box
+    {
+        margin: auto;
+    }
 }
 
-@media (min-width: 375px) AND (max-width:767px){
+@media (min-width: 0px) AND (max-width:767px){
     .container {
     padding-bottom: 20px;
     }
@@ -681,6 +776,20 @@ margin-bottom: 15px;
     }
     .post-info {
         display: none;
+    }
+    .main-post-box .posts {
+        display: block;
+        width: 100%;
+        margin-right: auto;
+        text-align: center;
+    }
+    .main-post-box .sidebar-info {
+        display: block;
+        margin-top: 100px;
+        width: 100%;
+    }
+    .popular-category .posts-box {
+        margin-bottom: 45px;
     }
     .category-lists {
         width: 100%;
@@ -704,6 +813,12 @@ margin-bottom: 15px;
     }
     .footer-box {
     padding-bottom: 20px;
+    }
+
+    .main-post-box .posts .post-img-box {
+        position: relative;
+        width: 300px;
+        margin: auto;
     }
 }
 

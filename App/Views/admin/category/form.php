@@ -1,5 +1,6 @@
-
-                <div class="overlay"></div>
+<div class="popup-container">
+             
+             <div class="overlay"></div>
 
                 <div class="popup">
                     <form action="<?= $action; ?>" method="POST" data-target=<?= fullurl("admin/categorys") ?> id="theform" >
@@ -31,8 +32,7 @@
                                     </select>
                                     
                                 </div>
-                            </div>
-                            <div class="form-submit">
+                                <div class="form-submit">
                                 <button class="submit" name="submit" type="button">
                                    <?= isset($name) ? "Save" : "Submit" ?>
                                 </button>
@@ -42,8 +42,9 @@
                                     close
                                 </button>
                             </div>
+                            </div>
                         </div>
                     </form>
                     <div class="loading"> loading ...</div>
                 </div>
-            
+</div>

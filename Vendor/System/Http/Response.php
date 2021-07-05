@@ -4,6 +4,10 @@ use System\Application;
 class Response 
 {
 
+        // this output will come from $this->load->action($controller,$action,$args)
+        // wchcil will return function come from this method
+        // this function i need to comvert this output to string then echo this output
+
         private $output;
         private $headers = [];
         private $app;
@@ -13,7 +17,11 @@ class Response
         {
             $this->app = $app;
         }
-
+        
+        
+        // this output will come from $this->load->action($controller,$action,$args)
+        // wchcil will return function come from this method
+        // this function i need to comvert this output to string then echo this output
         public function setoutput($content)
         {
             $this->content = $content;

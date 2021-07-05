@@ -7,8 +7,6 @@ class UsersController extends Controller
     public function index()
     {
 
-
-
     $data['session_results'] =  $this->session->has("success") ? $this->session->pull("success") : null;
     $this->html->settitle("users");
      $this->html->setbreadcrumb("users");

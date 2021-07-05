@@ -6,7 +6,10 @@ class LogoutController extends Controller
 {
     public function index()
     {
-        $this->cookie->remove("logincode");
+        if( isset($_COOKIE['logincode']))
+        {
+            $this->cookie->remove("logincode",-1);
+        }
         $this->session->remove("logincode");
         $this->cookie->removeall();
         $this->session->destroy();

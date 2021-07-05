@@ -19,7 +19,7 @@ class LoginController extends Controller
         if( $loginmode->isloggined() )
         {
         
-          $this->url->redirect("/");
+          $this->url->redirect("/admin");
         }
 
 
@@ -49,7 +49,7 @@ class LoginController extends Controller
             if($remember == "on")
             {
 
-              $this->cookie->setcookie("logincode",$user->logincode);
+              $this->cookie->setcookie("logincode",$user->logincode , 1);
             }
             else
             {

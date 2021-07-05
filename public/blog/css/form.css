@@ -1,0 +1,313 @@
+
+
+ form
+{
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: var(--light-background);
+   
+}
+.form-name
+{
+    text-align: center;
+    font-size: 31px;
+    color: var(--main-color);
+    padding: 5px 0 0 0;
+    font-family: monospace;
+}
+
+.form-items
+{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.form-items .form-group 
+{
+    margin: 10px 0;
+    margin: 2%;
+    width: 46%;
+   
+}
+
+
+
+.form-group label
+{
+    display: block;
+    font-size: 18px;
+    color: var(--main-color);
+    margin-bottom: 5px;
+}
+.form-group  input 
+{
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+    padding: 0 10px 0px;
+    /* border: 1px solid; */
+    border: 1px solid #ccc;
+}
+.form-group.multiple
+{
+    width: 100%;
+}
+.form-group  input
+{
+    width: 100%;
+    height: 40px;
+}
+.form-group.select select,.form-group.halfwidth select
+{
+    height: 40px;
+}
+.form-group.select select,.form-group.select,.form-group.multiple,.form-group.multiple select,.form-group.halfwidth select
+{
+    width: 100%;
+    display: block;
+}
+
+.form-group select.multiple option
+{
+    font-size: 20px;
+}
+.form-group.fullwidth
+{
+    width: 100%;
+}
+.form-group.halfwidth
+{
+    width: 45%;
+}
+
+
+.form-submit
+{
+    margin: 10px 10px 20px 10px
+}
+
+.form-submit button
+{
+    border: navajowhite;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-size: 16px;
+    /* color: var(--main-color); */
+    cursor: pointer;
+    background: var(--successful-color);
+    /* color: var(--main-bg-color); */
+    color: var(--second-bg-color);
+}
+.close-popup
+{
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+
+}
+.close-popup button
+{
+    border: navajowhite;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-size: 16px;
+    /* color: var(--main-color); */
+    cursor: pointer;
+    background: var(--danger-color);
+    /* color: var(--main-bg-color); */
+    color: var(--second-bg-color);
+}
+
+.overlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+    z-index: 3;
+    
+}
+
+/* adding result div */
+
+.results,.checkresults
+{
+    text-transform: capitalize;
+    margin: 15px 10px 0 10px;
+    text-align: center;
+    color: var(--main-bg-color);
+    padding: 8px 0;
+    border-radius: 4px;
+}
+.results.failed,.checkresults.failed
+{
+    background: var(--danger-color);
+}
+.results.success,.checkresults.success
+{
+    background-color: var(--successful-color);
+}
+
+.checkresults
+{
+    position: relative;
+    top: -2px;
+    padding: 10px;
+    margin: auto;
+    width: 87%;
+}
+.checkresults.hide,.results.hide
+{
+    display: none;
+}
+/* loading */
+.loading
+{
+    position: absolute;
+    padding: 20px;
+    color: #fff;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-size: 30px;
+    color: #444;
+    margin-top: -20px;
+    z-index: 4;
+    display: none;
+}
+.loading.show 
+{
+    display: block;
+}
+.popup form.load
+{
+    opacity: .4;
+    
+}
+
+
+/* edit form */
+
+.edit-form
+{
+    width: 700px;
+    margin: 100px auto;
+    background: var(--main-bg-color);
+    padding: 20px;
+    position: relative;
+}
+
+.session-results
+{
+    width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    background: var(--successful-color);
+    color: var(--main-bg-color);
+}
+.session-results.danger
+{ 
+      background: var(--danger-color);
+
+}
+
+
+ .popup.posts
+{
+
+}
+.posts-form .form-group {
+        margin: 10px 0;
+        width: 100%;
+}
+
+.posts-form .form-items textarea
+{
+    width: 100%;
+    border: 1px solid #eee;
+    min-height: 350px;
+    font-size: 20px;
+    padding: 10px;
+}
+.posts-form .form-items .divflex
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+} 
+
+.posts-form .form-items .divflex .form-group {
+    width: 100%;
+}
+
+
+
+/* tags */
+
+.tag-container
+
+{
+	border: 2px solid #eee;
+	padding: 8px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.tag
+{
+	margin: 6px;
+	padding: 6px;
+	background: #f2f2f2;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	
+}
+.tag i
+{
+	margin-left: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+}
+.tag-container input
+{
+	border: 0;
+	outline : none;
+	font-size: 18px;
+	flex: 1;
+}
+.tag-container input:focus
+{
+		outline : none;
+}
+
+
+/* settigns page */
+
+.form-wraper
+{
+
+    padding: 0 30px;
+    margin: auto;
+}
+.not-popup-form
+{
+    background: var(--main-bg-color);
+    margin: 100px auto;
+}
+
+@media (max-width: 1024px) {
+    .form-items .form-group {
+        width: 100%;
+        padding: 0 30px;
+        margin: 10px 0;
+    }
+}
+

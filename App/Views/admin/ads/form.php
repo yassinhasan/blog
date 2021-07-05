@@ -1,4 +1,4 @@
-
+<div class="popup-container">
                 <div class="overlay"></div>
 
                 <div class="popup ads">
@@ -78,7 +78,7 @@
                                     class="form-input"
                                     >
                                 </div>
-                                <div class="form-group halfwidth">
+                                <div class="form-group select fullwidth">
                                     <label for="categoryname">
                                         Status
                                     </label>
@@ -89,10 +89,8 @@
                                         
 
                                     </select>
-                                    
                                 </div>
-                            </div>
-                            <div class="form-submit">
+                                 <div class="form-submit">
                                 <button class="submit" name="submit" type="button">
                                    <?= isset($name) ? "Save" : "Submit" ?>
                                 </button>
@@ -103,7 +101,59 @@
                                 </button>
                             </div>
                         </div>
+
+                        </div>
                     </form>
                     <div class="loading"> loading ...</div>
                 </div>
-            
+</div>
+
+
+
+
+
+
+<div class="popup-container">
+                <div class="overlay"></div>
+
+                <div class="popup">
+
+                    <form action="<?= $action; ?>" method="POST" data-target=<?= fullurl("admin/ads") ?> id="theform" class="ads-form">
+
+                        <div class="box">
+                            <div class="form-name"> 
+                                Add select option
+                            </div>
+
+                            <div class="results"></div>
+
+                            <div class="form-items">
+                                <div class="form-group">
+                                    <label for="selectoption">
+                                    Add select option
+                                    </label>
+                                    <input type="text" name="selectoption" placeholder="selectoption..."
+                                    class="form-input"
+                                    >
+                                </div>
+
+                                 <div class="form-submit">
+                                <button class="submit" name="submit" type="button">
+                                   <?= isset($name) ? "Save" : "Submit" ?>
+                                </button>
+                            </div>
+
+
+                            <div class="close-popup">
+                                <button class="close-pop-button">
+                                    close
+                                </button>
+                            </div>
+
+                        </div>
+
+                        </div>
+                    </form>
+                    <div class="loading"> loading ...</div>
+                </div>
+</div>

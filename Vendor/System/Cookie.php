@@ -4,14 +4,16 @@ namespace System;
 class  Cookie
 {
     private $app;
+    private $domainpath;
     public function __construct($app)
     {
         $this->app = $app;
     }
     // 3600 equal to 1 hr
-    public function setcookie($key,$value , $timeinhour = 10)
+    public function setcookie($key,$value , $time )
     {
-        \setcookie($key,$value,\time() +  $timeinhour * 3600 , "/","", false ,true );
+        $time = $time == -1 ? -1 : time() + $time * 3600;
+        \setcookie($key,$value, $time,"/","", false ,true );
     }
 
     public function get($key)
@@ -21,7 +23,8 @@ class  Cookie
 
     public function remove($key)
     {
-        \setcookie($key,null, -1 , "/","", false ,true );
+        
+        $this->setcookie($key,$_COOKIE['$key'] ,-1);
         if(isset($_COOKIE[$key]))
         {
             unset($_COOKIE[$key]);
@@ -45,5 +48,10 @@ class  Cookie
     public function has($key)
     {
         return isset($_COOKIE[$key]);
+    }
+
+    public function domainpath()
+    {
+        return $this->domainpath = dirname($this->app->request->server("SCRIPT_NAME"));
     }
 }

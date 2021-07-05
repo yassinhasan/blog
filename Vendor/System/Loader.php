@@ -60,10 +60,14 @@ class Loader
     public function action($controller,$action,$args)
     {
         
-            $obj = $this->controller($controller);
+            (object) $obj = $this->controller($controller);
             
 
-           return call_user_func_array([$obj,$action],$args);
+            return $obj->$action($args);
+        //    return call_user_func_array([$obj,$action],$args);
+        //    return call_user_func(array($obj,$action),$args);
+      
+          
  
     }
 

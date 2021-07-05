@@ -101,3 +101,17 @@ if(!function_exists("read_more"))
         }
     }
 }
+
+if(!function_exists("seo"))
+{
+    function seo($string)
+    {
+        $string = trim($string);
+
+        $string =preg_replace("#[^a-zA-Z0-9]#" , " " , $string);
+        $string =preg_replace("#[\s]+#" , " " , $string);
+        $string =str_replace(" " , "-" , $string);
+        $string =trim($string,"-");
+        return $string;
+    }
+}

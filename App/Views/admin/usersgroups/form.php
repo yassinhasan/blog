@@ -1,4 +1,4 @@
-
+<div class="popup-container">
                 <div class="overlay"></div>
 
                 <div class="popup">
@@ -11,7 +11,7 @@
                             </div>
                             <div class="results"></div>
                             <div class="form-items">
-                                <div class="form-group fullwidth">
+                                    <div class="form-group fullwidth">
                                     <label for="categoryname">
                                     users group  Name
                                     </label>
@@ -19,9 +19,8 @@
                                     value="<?= isset($name) ? $name : "" ?>"
                                     class="form-input"
                                     >
-                                </div>
-                            </div>
-                            <div class="form-group multiple">
+                                    </div>
+                                    <div class="form-group multiple">
                                     <label for="usersgroups">
                                         all pages 
                                      
@@ -44,20 +43,22 @@
                                     ?>
                                                                                
                                     </select>
+                                    </div>
+                                            <div class="form-submit">
+                                        <button class="submit" name="submit" type="button">
+                                        <?= isset($name) ? "Save" : "Submit" ?>
+                                        </button>
+                                    </div>
+                                    <div class="close-popup">
+                                        <button class="close-pop-button">
+                                            close
+                                        </button>
+                                    </div>
                                     
-                                </div>
-                            <div class="form-submit">
-                                <button class="submit" name="submit" type="button">
-                                   <?= isset($name) ? "Save" : "Submit" ?>
-                                </button>
                             </div>
-                            <div class="close-popup">
-                                <button class="close-pop-button">
-                                    close
-                                </button>
-                            </div>
+
                         </div>
                     </form>
                     <div class="loading"> loading ...</div>
                 </div>
-            
+</div>

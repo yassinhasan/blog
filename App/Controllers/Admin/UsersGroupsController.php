@@ -29,33 +29,35 @@ class UsersGroupsController extends Controller
 
 
     
-        $insert = $this->load->model("UsersGroups")->create();
-
-        if($insert)
+        
+        $json = [];
+        if($this->isvalid())
         {
-            $json['success'] = " inserted succseully"; 
-          
+
+            $insert = $this->load->model("UsersGroups")->create();
+            if($insert)
+            {
+                 $json['success'] = " inserted succseully"; 
+            }
+
         }
         else
         {
-            $json['error'] = " error in inserted "; 
-        }
-
-      
+            $json['error'] = $this->validator->getflattenmessage(); 
+        }  
        return $this->json($json);
     }
 
     public function edit($id)
     {
-        $id = $id[0];
-
+        $id = array_shift($id)[0];
       return  $this->prepareform($id);
     }
 
 
     public function save($id)
     {
-        $id = $id[0];
+        $id = array_shift($id)[0];
 
         $insert = $this->load->model("UsersGroups")->update($id);
 
@@ -93,6 +95,7 @@ class UsersGroupsController extends Controller
         }
         else
         {
+           
             $usersgroups =  $this->load->model("UsersGroups")->getbyid($id);
             $allpages = [];
             foreach($this->route->grtroutes() as $page)
@@ -115,7 +118,7 @@ class UsersGroupsController extends Controller
 
     public function delete($id)
     {
-         $id = $id[0];
+        $id = array_shift($id)[0];
         // first get data and check if valid or no
         // if valid so insert it into table category
             // here data is alrady valid so insert it into model class
@@ -136,6 +139,13 @@ class UsersGroupsController extends Controller
 
             $this->json($json);
          
+    }
+
+    public function isvalid()
+    {
+        $this->validator->required("name" , "name  is required");
+        $this->validator->required("pages" , "pages  is required");
+        return $this->validator->pass();
     }
 
 

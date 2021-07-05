@@ -942,7 +942,7 @@ table tbody tr td .progress span
 
 /* adding result div */
 
-.results
+.results,.columnresults
 {
     text-transform: capitalize;
     margin: 15px 10px 0 10px;
@@ -951,11 +951,11 @@ table tbody tr td .progress span
     padding: 8px 0;
     border-radius: 4px;
 }
-.results.failed
+.results.failed,.columnresults.failed
 {
     background: var(--danger-color);
 }
-.results.success
+.results.success,.columnresults.success
 {
     background-color: var(--successful-color);
 }
@@ -1088,6 +1088,8 @@ table tbody tr td .progress span
 
 /* settigns page */
 
+
+
 .form-wraper
 {
 
@@ -1145,8 +1147,23 @@ table tbody tr td .progress span
   
     color: var(--main-color);
 }
+.form-items .form-group.add-settings
 
-.details
 {
-    
+    margin: 0% 2% !important;
+}
+.form-items .form-group.add-settings button
+{
+    border: navajowhite;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #f44336;
+    color: var(--second-bg-color);
+}
+
+.form-group.hide
+{
+    display: none;
 }

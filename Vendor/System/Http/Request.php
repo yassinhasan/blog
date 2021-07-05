@@ -10,7 +10,9 @@ class Request
 
     public function prepareurl()
     {
+        
         $request_uri = $this->server("REQUEST_URI");
+      
         // $script_name = $this->server("SCRIPT_NAME");
         if(strpos($request_uri,"?") !== false)
         {

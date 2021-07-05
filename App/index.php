@@ -7,19 +7,52 @@ $app = Application::getinstance();
 
 // add layout to container in $app so
 // it will return function load controaller[layoutcontrolelr]
+/*
+test
+*/
+$access  = function($app)
+{
+    $app->route->currentroute();
+    return $app->load->controller("Admin\Access")->index();;
+};
+
+$access($app);
+
+
+
+// $app->load->controller("Admin\Access")->index();
 
 $app->SHARE("layout",function($app){
     return $app->load->controller("Admin/Common/Layout");
 });
+$app->SHARE("bloglayout",function($app){
+    return $app->load->controller("Blog/Common/BlogLayout");
+});
+
+$app->SHARE("settings",function($app)
+{
+  return $app->load->model("settings");
+});
+
 
 // homepage
 
-$app->load->controller("Admin\Access")->index();
 
+
+
+// blog
 
 $app->route->add_route("/","Blog/Blog");
 
+$app->route->add_route("/blog/register","Blog/Rregister");
+$app->route->add_route("/blog/register/submit","Blog/Rregister@SUBMIT","POST");
+$app->route->add_route("/blog/register/checkexistsdata","Blog/Rregister@Checkexistsdata");
 
+$app->route->add_route("/blog/login","Blog/Login");
+$app->route->add_route("/blog/login/submit","Blog/Login@SUBMIT","POST");
+
+
+$app->route->add_route("/blog/category/:text/:id","Blog/Common/Category@submit","post");
 
 // admin page
 // admin/users/login ده الينك الي هينكب فوق واقارنه مع الي مكتوب ده
@@ -120,6 +153,8 @@ $app->route->add_route("/","Blog/Blog");
 
     $app->route->add_route("admin/settings","Admin/Settings");
     $app->route->add_route("admin/settings/save/:id","Admin/Settings@save","POST");
+    $app->route->add_route("admin/settings/popup","Admin/Settings@popup","POST");
+    $app->route->add_route("admin/settings/savepopup","Admin/Settings@savepopup","POST");
 
     // contact settings 
 

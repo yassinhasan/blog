@@ -1,4 +1,4 @@
-
+<div class="popup-container">
                 <div class="overlay"></div>
 
                 <div class="popup posts">
@@ -99,7 +99,6 @@
                                 </div>                                
                                 <?php }
                                 ?>
-                            </div>
                             <div class="form-submit">
                                 <button class="submit" name="submit" type="button">
                                    <?= isset($name) ? "Save" : "Submit" ?>
@@ -109,9 +108,11 @@
                                 <button class="close-pop-button">
                                     close
                                 </button>
+                            </div> 
                             </div>
+
                         </div>
                     </form>
                     <div class="loading"> loading ...</div>
                 </div>
-            
+</div>

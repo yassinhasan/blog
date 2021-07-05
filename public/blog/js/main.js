@@ -24,3 +24,20 @@ window.addEventListener("resize",()=>
 })
 
 
+// get url then get last section of it like home or posts or category then add class active on click
+
+let url = window.location.pathname;
+
+
+
+ url = url.split("/").pop();
+
+if(url.length == 0)
+{
+    url += "home";
+}
+
+
+console.log(url)
+ document.querySelector( "[data-active ='"+ url+"-active']").classList.add("active");
+

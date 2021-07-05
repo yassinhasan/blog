@@ -27,6 +27,11 @@ class UploadFile
         } 
     }
 
+    public function addmessage($message)
+    {
+        $this->error_message[] = $message;
+    }
+
     public function getfileinfo($input)
     {
         // full info of file uploaded frim input
@@ -76,6 +81,19 @@ class UploadFile
         //     pre($this->getallmessages());
         // }
     }
+    public function checkerror()
+    {
+            if(! $this->isimage())
+            {
+                $this->addmessage("soory this file not image");
+                
+            }
+
+            // elseif( ! $this->allowedsize())
+            // {
+            //     $this->addmessage("soory ".$this->filename . "is  bigger than " .$this->filesize); 
+            // }   
+    } 
 
     public function getfilename()
     {
@@ -105,8 +123,7 @@ class UploadFile
     public function isimage()
     {
     return (strpos($this->filetype , "image/") === 0   AND  in_array(strtolower($this->file_extension),self::ALLOWED_EXTENSION) ) ;
-        
-           
+               
     }
 
     public function allowedsize()
@@ -114,19 +131,7 @@ class UploadFile
         return ($this->filesize < $this->filesize);
     }
 
-    public function checkerror()
-    {
-            if(! $this->isimage())
-            {
-                $this->addmessage("soory this file not image");
-                
-            }
 
-            // elseif( ! $this->allowedsize())
-            // {
-            //     $this->addmessage("soory ".$this->filename . "is  bigger than " .$this->filesize); 
-            // }   
-    } 
 
 
     public function errorupload()
@@ -134,10 +139,6 @@ class UploadFile
         return   ($this->fileerror === 4);
     }
 
-    public function addmessage($message)
-    {
-        $this->error_message[] = $message;
-    }
 
     public function getallmessages()
     {
@@ -152,9 +153,7 @@ class UploadFile
 
     public function moveto($target , $filename = null)
 
-    {
-       
-        
+    {  
         $filename = sha1(rand(0,1000))."_".sha1(rand(0,1000)).".".$this->file_extension;
         $this->savedname = $filename;
         $destination = $target.self::DS.$filename;

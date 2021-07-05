@@ -126,7 +126,7 @@ themeicon.addEventListener("click",()=>
 //open popup
 
 
-    let popup = document.querySelector(".popup-container"),
+
     closepopup = document.querySelector(".close-pop-button"),
     addcategory = document.querySelector(".add-cat-button"),
     editbtn = document.querySelector(".btn-edit");
@@ -138,12 +138,17 @@ themeicon.addEventListener("click",()=>
     if(addcategory)
     {
                 
-       
+  
   
     addcategory.addEventListener("click",(e)=>
     {
-        popup.innerHTML = "";
         e.preventDefault();
+
+
+        //
+
+
+        //
         url = addcategory.getAttribute("data-target-url");
 
         fetch(url)
@@ -157,9 +162,7 @@ themeicon.addEventListener("click",()=>
           let html = new DOMParser();
           let dom =  html.parseFromString(data,"text/html");
 
-          let  overlay = dom.querySelector(".overlay"),
-          popform = dom.querySelector(".popup");
-          
+          let  popup_container = dom.querySelector(".popup-container");
 
           // start tags
 
@@ -236,15 +239,18 @@ themeicon.addEventListener("click",()=>
           // end tags
         
   
-          popup.appendChild(overlay);
-          popup.appendChild(popform);
-          CKEDITOR.replace( 'details' );
+          document.body.append(popup_container);
 
-       
-          if(popup.classList.contains("hide"))
-          {
-            popup.classList.remove("hide");
-          }
+          // document.body.appendChild(popform);
+           let details = document.querySelector(".details");
+           if(details)
+           {
+                     CKEDITOR.replace( 'details' );
+           }
+           
+  
+
+
 
         })
     })
@@ -259,12 +265,13 @@ themeicon.addEventListener("click",()=>
     {
       if(e.target.classList.contains("overlay"))
       {
-        popup.classList.add("hide");
+        document.querySelector(".popup-container").remove();
+
       }
       if(e.target.classList.contains("close-pop-button"))
       {
         e.preventDefault()
-        popup.classList.add("hide");
+        document.querySelector(".popup-container").remove();
       }
       if(closepopup)
       {
@@ -278,6 +285,8 @@ themeicon.addEventListener("click",()=>
 
 
     // CLICK ON SUBMIT AND get data by ajax
+
+    let count = 0;
     document.addEventListener("click",(e)=>
     {
       
@@ -285,12 +294,19 @@ themeicon.addEventListener("click",()=>
       {
    
         let submitbutton = e.target,
-        form = submitbutton.parentElement.parentElement.parentElement,
+        form = submitbutton.parentElement.parentElement.parentElement.parentElement,
         results = document.querySelector(".results"),
+        columnresults =   document.querySelector(".columnresults"),
         loading = document.querySelector(".loading"),
         formaction = form.getAttribute("action");
 
-        let details = popup.querySelector(".details");
+
+        //
+
+
+        //
+
+        let details = document.body.querySelector(".details");
         if(details)
         {
                   details.value = CKEDITOR.instances.details.getData();
@@ -303,6 +319,7 @@ themeicon.addEventListener("click",()=>
         {
           input.value = tags.toString();
         }
+      
         let formdata = new FormData(form);
 
         form.classList.add("load");
@@ -330,23 +347,60 @@ themeicon.addEventListener("click",()=>
             if( res.error)
             {
 
-
-
               results.classList.add("failed");
               results.innerHTML = res.error;
 
             }
-            else
+            if( res.existserror)
+            {
+
+              columnresults.classList.add("failed");
+              columnresults.innerHTML = res.existserror;
+
+            }
+            if( res.columnerror)
+            {
+
+              columnresults.classList.add("failed");
+              columnresults.innerHTML = res.columnerror;
+
+            }
+
+            else if(res.columnsuccess)
+            {
+
+              columnresults.classList.add("success");
+              columnresults.innerHTML = res.columnsuccess;
+              /*
+
+              here i need to add new input another old one 
+              how to do this dynamicaly
+
+              */
+              window.localStorage.setItem(res.columnname+"-input",[res.columnname , res.inputtype])
+              window.location.href = res.redirect;
+         
+            }
+            else if(res.success)
             {
               results.classList.add("success");
               results.innerHTML = res.success;
-              window.location.href = form.getAttribute("data-target");
+             window.location.href = form.getAttribute("data-target");
             }
             
           })
 
       }
     })
+
+
+
+
+   
+   
+
+
+    //
 
         // add form by edit click
     
@@ -361,7 +415,6 @@ themeicon.addEventListener("click",()=>
             let btn = e.target;
             if(confirm("are your sure edit")  === true)
             {
-              popup.innerHTML = "";
               let url = btn.parentElement.getAttribute("data-form-taregt");
               fetch(url,
                 {
@@ -380,15 +433,15 @@ themeicon.addEventListener("click",()=>
 
                      
                   // let details = dom.querySelector(".details");
-                  let  overlay = dom.querySelector(".overlay"),
-                  popform = dom.querySelector(".popup");
+                  let  popup_container = dom.querySelector(".popup-container"),
+
   
                  //  detalais.value = CKEDITOR.instances.details.getData()
 
           // start tags
 
-          let tagcontainer = dom.querySelector(".tag-container");
-          let  input = dom.querySelector(".tag-input");
+           tagcontainer = dom.querySelector(".tag-container"),
+            input = dom.querySelector(".tag-input");
           if(input)
           {
                       tags = input.getAttribute("data-value").split(",");
@@ -460,14 +513,9 @@ themeicon.addEventListener("click",()=>
           })
 
           // end tags
-          popup.appendChild(overlay);
-          popup.appendChild(popform);   
+          document.body.append(popup_container);
                   CKEDITOR.replace( 'details' );
   
-                  if(popup.classList.contains("hide"))
-                  {
-                    popup.classList.remove("hide");
-                  }
                 })
             }
             else
@@ -520,8 +568,85 @@ themeicon.addEventListener("click",()=>
        {
                 savenormalform.addEventListener("click",()=>
        {
-       console.log("yes")
+       
        })
        }
 
         
+ // add column in settings page and open popup settings
+ 
+ let add_column  = document.querySelector(".add-new-settings");
+ if(add_column)
+ {
+   add_column.addEventListener("click",(e)=>
+   {
+     e.preventDefault();
+    let url = add_column.getAttribute("data-target");
+    
+    fetch(url).then(resp=> resp.text())
+    .then((data)=>{
+
+      let html = new DOMParser();
+
+      let dom =  html.parseFromString(data,"text/html");
+
+      let popup_container = dom.querySelector(".popup-container");
+
+      popup_container.classList.remove("hide")
+
+      document.body.append(popup_container);
+
+      // noew i opended pop up
+
+      // now i will make when change on select and select select so i will show text to enter value and option
+
+    })
+  })
+
+ }
+
+
+ for(let key of  Object.keys(window.localStorage))
+ {
+    if(key.endsWith("-input"))
+    {
+      let divinputinfo = window.localStorage.getItem(key);
+      let inputname = divinputinfo.split(",").shift();
+      let inputtype = divinputinfo.split(",").pop();
+
+      let divel = document.createElement("div");
+      divel.classList.add("form-group");
+      divel.classList.add("fullwidth");
+   
+      let label = document.createElement("label");
+      label.setAttribute("for",inputname);
+      let labeltext = document.createTextNode(inputname);
+      label.appendChild(labeltext);
+   
+      let input = document.createElement("input");
+      input.classList.add("form-input");
+      input.setAttribute("type",inputtype);
+      input.setAttribute("name",inputname);
+      input.setAttribute("placeholder",inputname+"...");
+   
+      divel.appendChild(label);
+      divel.appendChild(input);
+   
+      let mainitem =document.querySelector(".mainpage-form-items")
+      mainitem.insertBefore(divel, mainitem.firstElementChild.nextSibling)
+
+    }
+ }
+
+     
+
+   
+   /*
+
+    <select name="status">
+        <option value="" >select   status</option>
+        <option value="enabled"  <?= (isset($status) &&  $status === 'enabled') ? 'selected' : "" ?>>Enabled</option>
+        <option value="disabled" <?= (isset($status) &&  $status === 'disabled') ? 'selected' : "" ?>>Disabled</option>                                          
+    </select>
+
+   */

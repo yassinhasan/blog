@@ -20,6 +20,12 @@ class Validation
 
     // add error message
 
+    // if already error exists with this input before
+
+    public function haserror($input)
+    {
+        return array_key_exists($input,$this->error);
+    }
     public function adderror($input,$message)
     {
         // if it has error before dont add it 
@@ -33,15 +39,17 @@ class Validation
 
     public function getmessages()
     {
+       if(!empty($this->error))
+       {
         return array_values($this->error);
+       }
     }
-
-    // if already error exists with this input before
-
-    public function haserror($input)
+    public function getflattenmessage()
     {
-        return array_key_exists($input,$this->error);
+        $errors = array_values($this->error);
+        return implode("<br>",$errors);
     }
+
 
     // required
     public function required($input,$custommessage = null)
@@ -110,6 +118,11 @@ class Validation
         return $this;
     }
 
+
+    // $this->validator->("email" , ["users" , "emai"]);
+    // first email i will get value from it 
+    // sendocd users this is table name
+    // "last email " this is column
     public function uniqe($input , array $database,$custommessage = null)
     {
         $tablename = null;
@@ -119,9 +132,11 @@ class Validation
         $inputvalue = $this->inputvalue($input);
         if(count($database) == 2)
         {
+            // $this->validator->("email" , ["users" , "emai"]);
             list($tablename , $column) = $database;
             $result = $this->app->db->select($input)->where("$column = ?" , $inputvalue)->fetch($tablename);
         }
+         // $this->validator->("email" , ["users" , "email" , "id" , "id"]);
         elseif(count($database) == 4)
         {
             //  $this->validator->uniqe("email",["users","email","userid",$userid]);
@@ -190,18 +205,54 @@ class Validation
         return $this;
     }
 
+    public function range($input , $min , $max,$custommessage= null,$ifdate=null)
+    {
+        if($this->haserror($input))
+        {
+            return $this;
+        }
+        $inputvalue = $this->inputvalue($input);
+
+        if($ifdate != null)
+        {
+            $inputvalue = strtotime($inputvalue);
+            $min = strtotime($min);
+            $max = strtotime($max);
+        }
+        if($inputvalue < $min || $inputvalue > $max)
+        {
+            $message = "";
+            if(isset($custommessage))
+            {
+                $message = $custommessage;
+            }
+            elseif($ifdate != null)
+            {
+              $message =  sprintf(" %s shoud be between %d and %d " , $input , date("Y-d-m",$min) , date("Y-m-d",$max));
+            }
+            else
+
+            {
+                $message = sprintf(" %s shoud be between %d and %d " , $input , $min , $max);
+            }
+
+
+
+            
+            $this->adderror($input,$message);
+        }
+        return $this;
+    }
+
     public function pass()
     {
         return empty($this->error);
     }
+
     public function fail()
     {
         return !$this->pass();
     }
 
-    public function getflattenmessage()
-    {
-        $errors = array_values($this->error);
-        return implode("<br>",$errors);
-    }
+
 }

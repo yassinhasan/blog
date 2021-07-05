@@ -19,7 +19,13 @@
                                edit settings <i class="fas fa-cog"></i>
                             </div>
                             <div class="results"></div>
-                            <div class="form-items">
+
+                            <div class="form-items mainpage-form-items">
+                                 <div class="form-group fullwidth add-settings" style="margin: 0% 2%;">
+                                    <button class="add-new-settings"
+                                    data-target="<?= fullurl("/admin/settings/popup") ?>"
+                                    > ad new settings</button>
+                                </div>
                                 <div class="form-group fullwidth">
                                     <label for="sitename">
                                         site name <i class="fas fa-edit"></i> 
@@ -39,11 +45,21 @@
                                     >
                                 </div>
                                 <div class="form-group select fullwidth">
+                                    <label for="autologin">
+                                    autologin <i class="fas fa-sign-in-alt"></i>
+                                    </label>
+                                    <select name="autologin">
+                                        <option value="" >select autologin  </option>
+                                        <option value="enabled"  <?= (isset($autologin) &&  $autologin === 'enabled') ? 'selected' : "" ?>>Enabled</option>
+                                        <option value="disabled" <?= (isset($autologin) &&  $autologin === 'disabled') ? 'selected' : "" ?>>Disabled</option>                                          
+                                    </select>
+                                </div>
+                                <div class="form-group select fullwidth">
                                     <label for="status">
-                                        Status <i class="fas fa-power-off"></i>
+                                        status  <i class="fas fa-power-off"></i>
                                     </label>
                                     <select name="status">
-                                        <option value="" >select users  status</option>
+                                        <option value="" >select   status</option>
                                         <option value="enabled"  <?= (isset($status) &&  $status === 'enabled') ? 'selected' : "" ?>>Enabled</option>
                                         <option value="disabled" <?= (isset($status) &&  $status === 'disabled') ? 'selected' : "" ?>>Disabled</option>                                          
                                     </select>
@@ -54,14 +70,15 @@
                                     </label>
                                     <textarea name="message" id="sitemessage" class="sitemessage" style="width: 100%"><?= isset($message) ? $message : "" ?></textarea> 
                                 </div>
-                            <div class="form-submit">
+                                <div class="form-submit">
                                 <button class="saveform" name="saveform" type="submit">
                                 Save
                                 </button>
                             </div>
+
                         </div>
                     </form>
-
 </div>
+
              
             

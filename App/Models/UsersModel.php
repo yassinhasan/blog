@@ -9,14 +9,18 @@ class UsersModel extends Model
     protected $tablename = "users";
     //protected $user;
 
-    public function insertnewusers()
+    public function insertnewusers($register = false)
     {
 
         $image = $this->request->file("image");
         $imagename = $image->moveto($this->file->toupload("images"))->savedname();
-        $result =   (bool) $this->data([
 
-        "user_group_id" => $this->request->post("user_group_id"),
+        
+        $user_group_id = $register == true ? 2 : $this->request->post("user_group_id"); 
+        $status = $register == true ? "disabled": $this->request->post("status"); 
+
+        $result =   (bool) $this->data([ 
+        "user_group_id" => $user_group_id,
          "first_name" => $this->request->post("first_name"),
          "last_name" => $this->request->post("last_name"),
          "email" => $this->request->post("email"),
@@ -25,7 +29,7 @@ class UsersModel extends Model
          "gender" => $this->request->post("gender"),
          "birthday" => strtotime($this->request->post("birthday")),
          "created" => $now = time(),
-         "status" => $this->request->post("status"),
+         "status" => $status,
          "ip"     => $this->request->server("SERVER_ADDR"),
          "logincode" => sha1($now.mt_rand())
          ])
